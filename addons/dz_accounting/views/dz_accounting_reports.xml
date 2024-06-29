@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <template id="fiscal_infos">
+        <div>
+            <div>NIF : <span t-field="o.partner_id.vat"/></div>
+            <div>NIS : <span t-field="o.partner_id.nis"/></div>
+            <div>RC : <span t-field="o.partner_id.company_registry"/></div>
+            <div>AI : <span t-field="o.partner_id.ai"/></div>
+        </div>
+    </template>
+
+    <template id="report_invoice_document_fiscal" inherit_id="account.report_invoice_document" >
+        <div t-if="o.partner_id.vat" id="partner_vat_address_not_same_as_shipping" position="replace">
+            <t t-call="dz_accounting.fiscal_infos" />
+        </div>
+
+        <div t-if="o.partner_id.vat" id="partner_vat_address_same_as_shipping" position="replace">
+            <t t-call="dz_accounting.fiscal_infos" />
+        </div>
+
+        <div t-if="o.partner_id.vat" id="partner_vat_no_shipping" position="replace" >
+            <t t-call="dz_accounting.fiscal_infos" />
+        </div>
+
+    </template>
+
+    <template id="document_tax_totals_timbre" inherit_id="account.document_tax_totals" >
+        <xpath expr="//tr[hasclass('o_total')]" position="replace">
+            <t t-if="tax_totals['timbre'] == 0">
+                <tr class="border-black o_total">
+                    <td><strong>Total</strong></td>
+                    <td class="text-end">
+                        <span t-esc="tax_totals['formatted_amount_total_rounded']" t-if="'formatted_amount_total_rounded' in tax_totals"/>
+                        <span t-esc="tax_totals['formatted_amount_total']" t-else=""/>
+                    </td>
+                </tr>
+            </t>
+            <t  t-if="tax_totals['timbre']">
+                <t t-if="doc" t-set="o" t-value="doc" />
+                <tr class="o_total">
+                    <td><strong>Droits de timbre</strong></td>
+                    <td class="text-end">
+                        <span t-esc="tax_totals['timbre']" t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+                    </td>
+                </tr>
+                <tr class="border-black o_total">
+                    <td><strong>Total</strong></td>
+                    <td class="text-end">
+                        <span t-esc="tax_totals['amount_total_timbre']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                    </td>
+                </tr>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="report_financial_ext">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <t t-set="data_report_margin_top" t-value="12"/>
+                <t t-set="data_report_header_spacing" t-value="9"/>
+                <t t-set="data_report_dpi" t-value="110"/>
+                <div class="page">
+                    <h2 t-esc="data['form']['account_report_id'][1]"/>
+
+                    <div class="row mt32 mb32">
+                        <div class="col-4">
+                            <strong>Target Moves:</strong>
+                            <p>
+                                <span t-if="data['form']['target_move'] == 'all'">All Entries</span>
+                                <span t-if="data['form']['target_move'] == 'posted'">All Posted Entries</span>
+                            </p>
+                        </div>
+                        <div class="col-4">
+                            <p>
+                                <t t-if="data['form']['date_from']">
+                                    <strong>Date from :</strong>
+                                    <span t-esc="data['form']['date_from']"/>
+                                    <br/>
+                                </t>
+                                <t t-if="data['form']['date_to']">
+                                    <strong>Date to :</strong>
+                                    <span t-esc="data['form']['date_to']"/>
+                                </t>
+                            </p>
+                        </div>
+                    </div>
+
+                    <table class="table table-sm table-reports">
+                        <thead>
+                            <tr>
+                                <th class="text-left">Code</th>
+                                <th class="text-left">Name</th>
+                                <th class="text-right">Solde Au <br/> <t t-esc="data['form']['date_from']" /> </th>
+                                <th class="text-right">Debit</th>
+                                <th class="text-right">Credit</th>
+                                <th class="text-right">Balance</th>
+                                <th class="text-right">Solde Au <br/> <t t-esc="data['form']['date_to']" /> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="report_lines" t-as="a">
+                                <t t-if="a['level'] != 0 and a.get('account')">
+                                    <t t-if="a.get('level') &gt; 3">
+                                        <t t-set="style" t-value="'font-weight: normal;'"/>
+                                    </t>
+                                    <t t-if="not a.get('level') &gt; 3">
+                                        <t t-set="style" t-value="'font-weight: bold;'"/>
+                                    </t>
+
+                                    <td class="text-left" style="padding-right:10px;">
+                                        <span t-att-style="style" t-esc="a.get('name').split('-')[0]"/>
+                                    </td>
+                                    <td class="text-left" >
+                                        <span t-att-style="style" t-esc="a.get('name').split('-')[1]"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-set="written" t-value="False" />
+                                        <t t-foreach="previous_report_lines" t-as="b">
+                                            <t t-if="b.get('r_id') == a.get('r_id') and b.get('r_id') and a.get('r_id')" >
+                                                <t t-set="written" t-value="True" />
+                                                <span t-att-style="style" t-esc="b.get('balance')"
+                                                  t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                            </t>
+                                            <t t-if="b.get('account') == a.get('account') and b.get('account') and a.get('account')">
+                                                <t t-set="written" t-value="True" />
+                                                <span t-att-style="style" t-esc="b.get('balance')"
+                                                  t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                            </t>
+                                        </t>
+                                        <t t-if="not written" >
+                                                <span t-att-style="style" t-esc="int('0')"
+                                                  t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </t>
+                                    </td>
+                                    <td class="text-right" style="white-space: text-nowrap;">
+                                        <span t-att-style="style" t-esc="a.get('debit')"
+                                              t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                    </td>
+                                    <td class="text-right" style="white-space: text-nowrap;">
+                                        <span t-att-style="style" t-esc="a.get('credit')"
+                                              t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                    </td>
+                                    <td class="text-right" style="white-space: text-nowrap;">
+                                        <span t-att-style="style" t-esc="a.get('balance')"
+                                              t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                    </td>
+                                    <td class="text-right" >
+                                        <t t-set="written" t-value="False" />
+                                        <t t-foreach="previous_report_lines" t-as="b">
+                                            <t t-if="b.get('r_id') == a.get('r_id') and b.get('r_id') and a.get('r_id')">
+                                                <t t-set="written" t-value="True" />
+                                                <span t-att-style="style" t-esc="b.get('balance') + a.get('balance')"
+                                                  t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                            </t>
+                                            <t t-if="b.get('account') == a.get('account') and b.get('account') and a.get('account')">
+                                                <t t-set="written" t-value="True" />
+                                                <span t-att-style="style" t-esc="b.get('balance') + a.get('balance')"
+                                                  t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                            </t>
+                                        </t>
+                                         <t t-if="not written" >
+                                                <span t-att-style="style" t-esc="a.get('balance')"
+                                                  t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                            </t>
+                                    </td>
+                                </t>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="financial_report_pdf_ext" model="ir.actions.report">
+        <field name="name">Financial reports</field>
+        <field name="model">financial.report</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">dz_accounting.report_financial_ext</field>
+        <field name="report_file">dz_accounting.report_financial_ext</field>
+        <field name="print_report_name">'Financial reports'</field>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

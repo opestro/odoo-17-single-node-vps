@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="bilan_financier_report_config" model="account.liasse.report_config">
+            <field name="name">BILAN Financier</field>
+            <field name="type" eval="'bilan'"/>
+        </record>
+
+        <record id="report_bilan_financier_actif_1" model="report.bilan.actif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">ACTIFS NON COURANTS</field>
+        </record>
+        <record id="report_bilan_financier_actif_2" model="report.bilan.actif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Ecart d’acquisition ( goodwill )</field>
+            <field name="domain">[('code','=like','207%')]</field>
+            <field name="amortissement">['|', ('code', '=like', '2807%'), ('code', '=like', '2907%')]</field>
+        </record>
+        <record id="report_bilan_financier_actif_3" model="report.bilan.actif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Immobilisations incorporelles</field>
+            <field name="domain">[('code', '=like', '20%'), '!', ('code', '=like', '207%')]</field>
+            <field name="amortissement">['|', ('code', '=like', '280%'), ('code', '=like', '290%'), '!', ('code', '=like', '2807%'), '!', ('code', '=like', '2907%')]</field>
+        </record>
+        <record id="report_bilan_financier_actif_4" model="report.bilan.actif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Immobilisations corporelles</field>
+            <field name="domain">['|',('code', '=like', '21%'), ('code', '=like', '22%'), '!', ('code', '=like', '229%')]</field>
+            <field name="amortissement">['|', ('code', '=like', '281%'), '|', ('code', '=like', '282%'),'|', ('code', '=like', '291%'), ('code', '=like', '292%')]</field>
+        </record>
+        <record id="report_bilan_financier_actif_9" model="report.bilan.actif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Immobilisations en cours</field>
+            <field name="domain">[('code', '=like', '23%')]</field>
+            <field name="amortissement">[('code', '=like', '293%')]</field>
+        </record>
+        <record id="report_bilan_financier_actif_10" model="report.bilan.actif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Immobilisations financières</field>
+            <field name="domain"></field>
+            <field name="amortissement"></field>
+        </record>
+        <record id="report_bilan_financier_actif_11" model="report.bilan.actif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Titres mis en équivalence</field>
+            <field name="domain">[('code', '=like', '265%')]</field>
+            <field name="amortissement"></field>
+        </record>
+        <record id="report_bilan_financier_actif_13" model="report.bilan.actif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Autres participations et créances rattachées</field>
+            <field name="domain">[('code', '=like', '26%'), '!', ('code', '=like', '265%'), '!', ('code', '=like', '269%')]
+            </field>
+            <field name="amortissement"></field>
+        </record>
+        <record id="report_bilan_financier_actif_14" model="report.bilan.actif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Autres titres immobilisés</field>
+            <field name="domain">['|', ('code', '=like', '271%'), '|', ('code', '=like', '272%'), ('code', '=like', '273%')]</field>
+            <field name="amortissement"></field>
+        </record>
+        <record id="report_bilan_financier_actif_15" model="report.bilan.actif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Prêts et autres actifs financiers non courants</field>
+            <field name="domain">['|', ('code', '=like', '274%'), '|', ('code', '=like', '275%'), ('code', '=like', '276%')]</field>
+            <field name="amortissement"></field>
+        </record>
+        <record id="report_bilan_financier_actif_17" model="report.bilan.actif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">TOTAL ACTIF NON COURANT</field>
+            <field name="domain"></field>
+            <field name="amortissement"></field>
+        </record>
+        <record id="report_bilan_financier_actif_18" model="report.bilan.actif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">ACTIF COURANT</field>
+            <field name="domain"></field>
+            <field name="amortissement"></field>
+        </record>
+        <record id="report_bilan_financier_actif_19" model="report.bilan.actif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Stocks et encours</field>
+            <field name="domain">[('code', '=like', '3%'), '!', ('code', '=like', '39%')]</field>
+            <field name="amortissement">[('code', '=like', '39%')]</field>
+        </record>
+        <record id="report_bilan_financier_actif_20" model="report.bilan.actif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Créances et emplois assimilés</field>
+            <field name="domain"></field>
+            <field name="amortissement"></field>
+        </record>
+        <record id="report_bilan_financier_actif_21" model="report.bilan.actif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Clients</field>
+            <field name="domain">[('code', '=like', '41%'), '!', ('code', '=like', '419%')]</field>
+            <field name="amortissement">[('code', '=like', '491%')]</field>
+        </record>
+        <record id="report_bilan_financier_actif_22" model="report.bilan.actif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Autres débiteurs</field>
+            <field name="domain">[('code', '=like', '409%')]</field>
+            <field name="domain_debit">['|', ('code', '=like', '42%'), '|', ('code', '=like', '43%'),
+                '|', ('code', '=like', '441%'), '|', ('code', '=like', '442%'),
+                '|', ('code', '=like', '443%'), '|', ('code', '=like', '449%')
+                , '|', ('code', '=like', '45%'), '|', ('code', '=like', '46%')
+                , '|', ('code', '=like', '486%'), ('code', '=like', '489%')]
+            </field>
+            <field name="amortissement">['|', ('code', '=like', '495%'), ('code', '=like', '496%')]</field>
+        </record>
+        <record id="report_bilan_financier_actif_23" model="report.bilan.actif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Impôts et assimilés</field>
+            <field name="domain">['|', ('code', '=like', '444%'), '|', ('code', '=like', '445%'), ('code', '=like', '447%')]</field>
+            <field name="amortissement"></field>
+        </record>
+        <record id="report_bilan_financier_actif_24" model="report.bilan.actif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Autres actifs courants</field>
+            <field name="domain_debit">[('code', '=like', '48%')</field>
+            <field name="amortissement"></field>
+        </record>
+        <record id="report_bilan_financier_actif_26" model="report.bilan.actif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Placements et autres actifs financiers courants</field>
+            <field name="domain">[('code', '=like', '50%'), '!', ('code', '=like', '509%')]</field>
+            <field name="amortissement"></field>
+        </record>
+        <record id="report_bilan_financier_actif_27" model="report.bilan.actif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Trésorerie</field>
+            <field name="domain_debit">['|', ('code', '=like', '51%'), '|', ('code', '=like', '52%'),'|', ('code', '=like', '53%'), ('code', '=like', '54%')]</field>
+            <field name="domain">[('code', '=like', '519%')]</field>
+            <field name="amortissement">[('code', '=like', '59%')]</field>
+        </record>
+        <record id="report_bilan_financier_actif_28" model="report.bilan.actif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">TOTAL ACTIF COURANT</field>
+            <field name="domain"></field>
+            <field name="amortissement"></field>
+        </record>
+
+        <record id="report_bilan_financier_actif_29" model="report.bilan.actif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">TOTAL GENERAL ACTIF</field>
+            <field name="domain"></field>
+            <field name="amortissement"></field>
+        </record>
+
+        <!-- passif -->
+
+        <record id="report_bilan_financier_passif_1" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">CAPITAUX PROPRES</field>
+            <field name="domain"></field>
+        </record>
+        <record id="report_bilan_financier_passif_2" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Capital emis</field>
+            <field name="domain">['|', ('code', '=like', '101%'), ('code', '=like', '108%')]</field>
+        </record>
+        <record id="report_bilan_financier_passif_3" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Capital non appelé</field>
+            <field name="domain">[('code', '=like', '109%')]</field>
+        </record>
+        <record id="report_bilan_financier_passif_4" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Primes et réserves</field>
+            <field name="domain">['|', ('code', '=like', '104%'), ('code', '=like', '106%')]</field>
+        </record>
+        <record id="report_bilan_financier_passif_5" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Ecart de réévaluation</field>
+            <field name="domain">[('code', '=like', '105%')]</field>
+        </record>
+        <record id="report_bilan_financier_passif_6" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Ecart d’équivalence</field>
+            <field name="domain">[('code', '=like', '107%')]</field>
+        </record>
+        <record id="report_bilan_financier_passif_7" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Résultat net - Résultat net part du groupe (1)</field>
+            <field name="domain">[('code', '=like', '12%')]</field>
+        </record>
+        <record id="report_bilan_financier_passif_8" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Report à nouveau</field>
+            <field name="domain">[('code', '=like', '11%')]</field>
+        </record>
+        <record id="report_bilan_financier_passif_9" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Part de la société consolidante (1)</field>
+            <field name="domain"></field>
+        </record>
+        <record id="report_bilan_financier_passif_10" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Part des minoritaires (1)</field>
+            <field name="domain"></field>
+        </record>
+        <record id="report_bilan_financier_passif_11" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">PASSIFS NON-COURANTS</field>
+            <field name="domain"></field>
+        </record>
+        <record id="report_bilan_financier_passif_13" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Emprunts et dettes financières</field>
+            <field name="domain">['|', ('code', '=like', '16%'), ('code', '=like', '17%')]</field>
+        </record>
+        <record id="report_bilan_financier_passif_14" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Impôts différés et provisionnés</field>
+            <field name="domain">['|', ('code', '=like', '134%'), ('code', '=like', '155%')]</field>
+        </record>
+        <record id="report_bilan_financier_passif_15" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Autres dettes non courantes</field>
+            <field name="domain">[('code', '=like', '229%')]</field>
+        </record>
+        <record id="report_bilan_financier_passif_16" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Provisions et produits constatés d'avance</field>
+            <field name="domain">['|', ('code', '=like', '15%'), '|', ('code', '=like', '131%'), ('code', '=like', '132%'), '!', ('code', '=like', '155%')]</field>
+        </record>
+        <record id="report_bilan_financier_passif_17" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">PASSIFS COURANTS</field>
+            <field name="domain"></field>
+        </record>
+        <record id="report_bilan_financier_passif_18" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Fournisseurs et comptes rattachés</field>
+            <field name="domain">[('code', '=like', '40%'), '!', ('code', '=like', '409%')]</field>
+        </record>
+        <record id="report_bilan_financier_passif_19" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Impôts</field>
+            <field name="domain_credit">['|', ('code', '=like', '444%'), '|', ('code', '=like', '445%'), ('code', '=like', '447%')]</field>
+        </record>
+        <record id="report_bilan_financier_passif_20" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Autres dettes</field>
+            <field name="domain_credit">['|', ('code', '=like', '42%'), '|', ('code', '=like', '43%'), '|', ('code', '=like', '440%'),
+                '|', ('code', '=like', '441%'), '|', ('code', '=like', '442%'), '|', ('code', '=like', '443%'),
+                '|', ('code', '=like', '448%'), '|', ('code', '=like', '449%'), '|', ('code', '=like', '45%'),
+                '|', ('code', '=like', '46%'), ('code', '=like', '48%')
+            </field>
+            <field name="domain">['|', ('code', '=like', '419%'), ('code', '=like', '509%')]</field>
+        </record>
+        <record id="report_bilan_financier_passif_21" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.bilan_financier_report_config')" />
+            <field name="name">Trésorerie Passif</field>
+            <field name="domain_credit">['|', ('code', '=like', '51%'), ('code', '=like', '52%')]</field>
+        </record>
+
+    </data>
+</odoo>

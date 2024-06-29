@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+
+    <t t-inherit="account.TaxTotalsField" t-inherit-mode="extension" owl="1">
+        <t t-foreach="totals.subtotals" position="after" >
+               <tr t-if="totals.timbre" >
+                    <td class="o_td_label">
+                        <label class="o_form_label o_tax_total_label">Timbre</label>
+                    </td>
+
+                    <td>
+                        <span
+                            name="timbre"
+                            t-esc="totals.timbre"
+                        /> DA
+                    </td>
+                </tr>
+        </t>
+        <span name="amount_total" position="replace">
+            <t t-if="totals.timbre == 0">
+                <span
+                            name="amount_total"
+                            t-att-class="Object.keys(totals.groups_by_subtotal).length > 0 ? 'oe_subtotal_footer_separator' : ''"
+                            t-out="totals.formatted_amount_total"
+                            t-attf-style="{{ !totals.formatted_amount_total_rounded ? 'font-size: 1.3em; font-weight: bold; white-space: nowrap;' : 'font-size: 1em;' }}"
+                        />
+            </t>
+            <t t-if="totals.timbre">
+                <span
+                            name="amount_total"
+                            t-att-class="Object.keys(totals.groups_by_subtotal).length > 0 ? 'oe_subtotal_footer_separator' : ''"
+                            t-esc="totals.formatted_amount_total_timbre"
+                            t-attf-style="{{ !totals.formatted_amount_total_rounded ? 'font-size: 1.3em; font-weight: bold; white-space: nowrap;' : 'font-size: 1em;' }}"
+                        />
+            </t>
+        </span>
+
+    </t>
+
+
+
+</templates>

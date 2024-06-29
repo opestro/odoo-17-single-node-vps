@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+
+            <record id="l10_dz_view_company_form_inherit_view" model="ir.ui.view">
+                <field name="name">l10_dz.res.company.form.inherit.view</field>
+                <field name="model">res.company</field>
+                <field name="inherit_id" ref="base.view_company_form"/>
+                <field name="arch" type="xml">
+
+                    <xpath expr="//field[@name='vat']" position="replace">
+                        <field name="vat" string='N.I.F' placeholder="e.g: 0016854585" />
+                        <field name="nis"/>
+                        <field name="ai"/>
+                        <field name="code_activite"/>
+                    </xpath>
+
+                </field>
+            </record>
+
+
+            <record id="l10_dz_res_partner_form_inherit_view" model="ir.ui.view">
+                <field name="name">l10_dz.res.partner.form.inherit.view</field>
+                <field name="model">res.partner</field>
+                <field name="priority" eval="5"/>
+                <field name="inherit_id" ref="base.view_partner_form"/>
+                <field name="arch" type="xml">
+
+                    <xpath expr="//field[@name='vat']" position="replace">
+                        <field name="vat" string='N.I.F' placeholder="e.g: 0016854585" />
+                        <field name="nis" placeholder="e.g: 0 016 236 753" />
+                        <field name="ai" />
+                        <field name="company_registry" string='R.C' />
+                        <field name="code_activite" />
+                    </xpath>
+
+                </field>
+            </record>
+
+
+    </data>
+</odoo>

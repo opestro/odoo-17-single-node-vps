@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <!--12/honoraires-->
+        <record id="form_view_report_honoraire_form" model="ir.ui.view">
+            <field name="name">report.honoraire.view</field>
+            <field name="model">report.honoraire</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button type="object" name="calculate_honoraire" string="Calculer automatiquement" class="btn-primary" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <label for="date_from" string="Period"/>
+                            <div>
+                                <field name="date_from" class="oe_inline"/> - <field name="date_to" class="oe_inline"/>
+                            </div>
+                        </group>
+                            <field name="line_ids" nolabel="1" >
+                                <tree editable="bottom">
+                                    <field name="partner_id"/>
+                                    <field name="amount"/>
+                                </tree>
+                            </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--13/TAP-->
+        <record id="form_view_report_tap_form" model="ir.ui.view">
+            <field name="name">report.tap.view</field>
+            <field name="model">report.tap</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button type="object" name="calculate_tap" string="Calculer automatiquement" class="btn-primary" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <label for="date_from" string="Period"/>
+                            <div>
+                                <field name="date_from" class="oe_inline"/> - <field name="date_to" class="oe_inline"/>
+                            </div>
+                        </group>
+                            <field name="line_ids" nolabel="1" >
+                                <tree editable="bottom">
+                                    <field name="partner_id"/>
+                                    <field name="ca_imposable"/>
+                                    <field name="ca_exo"/>
+                                    <field name="tap_amount"/>
+                                </tree>
+                            </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

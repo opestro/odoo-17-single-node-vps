@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem name="Generate Assets Entries"  id="base_accounting_kit.menu_asset_depreciation_confirmation_wizard" parent="account.menu_finance_entries_generate_entries" groups="account.group_account_user"/>
+    </data>
+</odoo>

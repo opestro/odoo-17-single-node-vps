@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <!--8.1/Creances-->
+        <record id="form_view_perte_creance_form" model="ir.ui.view">
+            <field name="name">perte.creance.view</field>
+            <field name="model">perte.creance</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <label for="date_from" string="Period"/>
+                            <div>
+                                <field name="date_from" class="oe_inline"/> - <field name="date_to" class="oe_inline"/>
+                            </div>
+                        </group>
+                            <field name="line_ids" nolabel="1" >
+                                <tree editable="bottom">
+                                    <field name="debiteur" required="True"/>
+                                    <field name="creance_value"/>
+                                    <field name="perte_value"/>
+                                </tree>
+                            </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--8.2/actions-->
+        <record id="form_view_perte_action_form" model="ir.ui.view">
+            <field name="name">perte.action.view</field>
+            <field name="model">perte.action</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <label for="date_from" string="Period"/>
+                            <div>
+                                <field name="date_from" class="oe_inline"/> - <field name="date_to" class="oe_inline"/>
+                            </div>
+                        </group>
+                            <field name="line_ids" nolabel="1" >
+                                <tree editable="bottom">
+                                    <field name="filaile" required="True"/>
+                                    <field name="nominal_value"/>
+                                    <field name="perte_value"/>
+                                </tree>
+                            </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+
+
+    </data>
+</odoo>

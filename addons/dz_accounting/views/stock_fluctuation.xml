@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!-- 1/ Tableau des mouvements des stocks : -->
+
+        <record id="form_view_report_stock_form" model="ir.ui.view">
+            <field name="name">report.stock.move.view</field>
+            <field name="model">report.stock.move</field>
+            <field name="arch" type="xml">
+                <form string="1/ STOCK">
+                    <sheet>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <notebook>
+                            <page string="SOLDE">
+                                <field name="code" nolabel="0">
+                                    <tree editable="top" string="">
+                                        <field name="account" widget="many2many_tags"/>
+                                        <field name="sauf" widget="many2many_tags"/>
+                                    </tree>
+                                </field>
+                                <field name="domain" readonly="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="form_view_report_stock_intermittent_form" model="ir.ui.view">
+            <field name="name">report.stock.intermittent.view</field>
+            <field name="model">report.stock.intermittent</field>
+            <field name="arch" type="xml">
+                <form string="2/ Stock">
+                    <sheet>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <notebook>
+                            <page string="SOLDE">
+                                <field name="code" nolabel="0">
+                                    <tree editable="top" string="">
+                                        <field name="account" widget="many2many_tags"/>
+                                        <field name="sauf" widget="many2many_tags"/>
+                                    </tree>
+                                </field>
+                                <field name="domain" readonly="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- 2/ Tableau de la fluctuation de la production stockée  -->
+
+        <record id="form_view_report_fluctuation_form" model="ir.ui.view">
+            <field name="name">report.fluctuation</field>
+            <field name="model">report.fluctuation</field>
+            <field name="arch" type="xml">
+                <form string="2/ Fluctuation">
+                    <sheet>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <notebook>
+                            <page string="SOLDE">
+                                <field name="code" nolabel="0">
+                                    <tree editable="top" string="">
+                                        <field name="account" widget="many2many_tags"/>
+                                        <field name="sauf" widget="many2many_tags"/>
+                                    </tree>
+                                </field>
+                                <field name="domain" readonly="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

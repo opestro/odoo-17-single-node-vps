@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="account_compte_res_form_view" model="ir.ui.view">
+            <field name="name">account.compte.res.view</field>
+            <field name="model">account.compte.res</field>
+            <field name="arch" type="xml">
+                <form string="Compte de résultat">
+                    <field name="company_id" invisible="1"/>
+                    <group col="4">
+                        <field name="exercice_id"/>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                    <footer>
+                        <button name="check_report" string="Print" type="object" default_focus="1" class="oe_highlight"/>
+                        <button string="Cancel" class="btn btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_account_compte_res_view" model="ir.actions.act_window">
+            <field name="name">Compte de résultat</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.compte.res</field>
+            <field name="view_id" ref="account_compte_res_form_view"/>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="account_compte_res_menu" name="COMPTE DE RESULTAT"
+                  action="action_account_compte_res_view"
+                  parent="account_reports_financiers"/>
+    </data>
+</odoo>

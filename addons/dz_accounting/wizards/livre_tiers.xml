@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="livre_tiers_form_view" model="ir.ui.view">
+            <field name="name">account.livre.tiers.form.view</field>
+            <field name="model">account.livre.tiers</field>
+            <field name="arch" type="xml">
+                <form string="Livre des tiers">
+                    <field name="company_id" invisible="1"/>
+                    <group>
+                        <field name="exercice_id"/>
+                    </group>
+                    <group col="4">
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                    <footer>
+                        <button name="check_report" string="Livre des tiers" type="object" default_focus="1" class="btn oe_highlight"/>
+                        <button name="check_report_balance" string="Balance générale" type="object" class="btn oe_highlight"/>
+                        <button name="check_report_xls" string="Livre des tiers XLS" type="object" class="btn oe_highlight"/>
+                        <button name="balance_xls" string="Balance XLS" type="object" class="btn oe_highlight"/>
+                        <button string="Cancel" class="btn btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_livre_tiers_view" model="ir.actions.act_window">
+            <field name="name">Livre des tiers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.livre.tiers</field>
+            <field name="view_id" ref="livre_tiers_form_view"/>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="livre_tiers_menu" name="Livre des tiers et Balance "
+                  action="action_livre_tiers_view"
+                  parent="account_reports_financiers"/>
+    </data>
+</odoo>

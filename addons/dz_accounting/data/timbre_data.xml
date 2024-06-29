@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+	
+	    <record id="config_timbre" model="config.timbre">
+            <field name="name">Calcul Timbre</field>
+            <field name="valeur">1.0</field>
+            <field name="tranche">100.0</field>
+            <field name="min_value">5.0</field>
+            <field name="max_value">2500.0</field>
+        </record>
+   
+
+    </data>
+</openerp>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="era_report_config" model="account.liasse.report_config">
+            <field name="name">ERA (État Récapitulatif Annuel)</field>
+            <field name="type" eval="'era'"/>
+        </record>
+
+        <record id="account_report_era_liasse_1" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.era_report_config')"/>
+            <field name="name">Chiffre d’affaires net des Rabais, remises, ristournes</field>
+            <field name="domain">['|',('code', '=like', '700%'),'|',('code', '=like', '701%'),'|',('code', '=like',
+                '702%'),'|',('code', '=like', '703%'),'|',('code', '=like', '704%'),'|',('code', '=like',
+                '705%'),'|',('code', '=like', '706%'),'|',('code', '=like', '707%'),'|',('code', '=like',
+                '708%'),('code', '=like', '709%')]
+            </field>
+        </record>
+        <record id="account_report_era_liasse_2" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.era_report_config')"/>
+            <field name="name">Solde clients</field>
+            <field name="domain">[('code', '=like', '41%'),'!',('code', '=like', '419%')]</field>
+        </record>
+        <record id="account_report_era_liasse_3" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.era_report_config')"/>
+            <field name="name">Provisions clients</field>
+            <field name="domain">[('code', '=like', '491%')]</field>
+        </record>
+        <record id="account_report_era_liasse_4" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.era_report_config')"/>
+            <field name="name">Provisions stocks</field>
+            <field name="domain">[('code', '=like', '39%')]</field>
+        </record>
+        <record id="account_report_era_liasse_5" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.era_report_config')"/>
+            <field name="name">Stocks</field>
+            <field name="domain">['|',('code', '=like', '30%'),'|',('code', '=like', '31%'),'|',('code', '=like',
+                '32%'),'|',('code', '=like', '33%'),'|',('code', '=like', '34%'),'|',('code', '=like',
+                '35%'),'|',('code', '=like', '36%'),('code', '=like', '37%')]
+            </field>
+        </record>
+        <record id="account_report_era_liasse_6" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.era_report_config')"/>
+            <field name="name">Capitaux propres</field>
+            <field name="domain">['|',('code', '=like', '10%'),'|',('code', '=like', '11%'),('code', '=like', '12%')]
+            </field>
+        </record>
+        <record id="account_report_era_liasse_7" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.era_report_config')"/>
+            <field name="name">Résultat net de l'exercice</field>
+            <field name="domain">['|',('code', '=like', '6%'),('code', '=like', '7%')]</field>
+        </record>
+
+        <record id="account_report_era_liasse_8" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.era_report_config')"/>
+            <field name="name">Dividendes disribués</field>
+            <field name="domain">[('code', '=like', '457%')]</field>
+        </record>
+        <record id="account_report_era_liasse_9" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.era_report_config')"/>
+            <field name="name">Chiffre d'affaire (C.A)</field>
+            <field name="domain">['|',('code', '=like', '700%'),'|',('code', '=like', '701%'),'|',('code', '=like',
+                '702%'),'|',('code', '=like', '703%'),'|',('code', '=like', '704%'),'|',('code', '=like',
+                '705%'),'|',('code', '=like', '706%'),'|',('code', '=like', '707%'),('code', '=like', '708%')]
+            </field>
+        </record>
+        <record id="account_report_era_liasse_10" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.era_report_config')"/>
+            <field name="name">Résultat opérationnel</field>
+            <field name="domain">['|',('code', '=like', '6%'),('code', '=like', '7%'),'!',('code', '=like',
+                '76%'),'!',('code', '=like', '77%'),'!',('code', '=like', '66%'),'!',('code', '=like',
+                '67%'),'!',('code', '=like', '692%'),'!',('code', '=like', '693%'),'!',('code', '=like',
+                '695%'),'!',('code', '=like', '698%')]
+            </field>
+        </record>
+        <record id="account_report_era_liasse_11" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.era_report_config')"/>
+            <field name="name">Sous-traitance générale</field>
+            <field name="domain">[('code', '=like', '611%')]</field>
+        </record>
+        <record id="account_report_era_liasse_12" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.era_report_config')"/>
+            <field name="name">Consommation de l'exercice</field>
+            <field name="domain">['|',('code', '=like', '60%'),'|',('code', '=like', '61%'),('code', '=like', '62%')]
+            </field>
+        </record>
+        <record id="account_report_era_liasse_13" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.era_report_config')"/>
+            <field name="name">Autres consommaitons</field>
+            <field name="domain">['|',('code', '=like', '604%'),'|',('code', '=like', '605%'),'|',('code', '=like',
+                '606%'),'|',('code', '=like', '607%'),('code', '=like', '608%')]
+            </field>
+        </record>
+        <record id="account_report_era_liasse_14" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.era_report_config')"/>
+            <field name="name">Autres services</field>
+            <field name="domain">['|',('code', '=like', '610%'),'|',('code', '=like', '612%'),'|',('code', '=like',
+                '614%'),'|',('code', '=like', '617%'),'|',('code', '=like', '618%'),'|',('code', '=like',
+                '620%'),'|',('code', '=like', '624%'),'|',('code', '=like', '626%'),'|',('code', '=like',
+                '627%'),'|',('code', '=like', '628%'),('code', '=like', '629%')]
+            </field>
+        </record>
+        <record id="account_report_era_liasse_15" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.era_report_config')"/>
+            <field name="name">Eléments extraordinaires</field>
+            <field name="domain">[('code', '=like', '67%')]</field>
+        </record>
+
+        <record id="account_report_era_liasse_16" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.era_report_config')"/>
+            <field name="name">Résultat ordinaire</field>
+            <field name="domain">['|',('code', '=like', '6%'),('code', '=like', '7%'),'!',('code', '=like',
+                '77%'),'!',('code', '=like', '67%'),'!',('code', '=like', '692%'),'!',('code', '=like',
+                '693%'),'!',('code', '=like', '695%'),'!',('code', '=like', '698%')]
+            </field>
+        </record>
+        <record id="account_report_era_liasse_17" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.era_report_config')"/>
+            <field name="name">Produits financiers</field>
+            <field name="domain">[('code', '=like', '76%')]</field>
+        </record>
+        <record id="account_report_era_liasse_18" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.era_report_config')"/>
+            <field name="name">Immobilisation financieres</field>
+            <field name="domain">['|',('code', '=like', '26%'),'|',('code', '=like', '27%'),('code', '=like',
+                '133%'),'!',('code', '=like', '269%')]
+            </field>
+        </record>
+        <record id="account_report_era_liasse_19" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.era_report_config')"/>
+            <field name="name">Perte comptable</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report_era_liasse_20" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.era_report_config')"/>
+            <field name="name">Résultat fiscal</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report_era_liasse_21" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.era_report_config')"/>
+            <field name="name">Charge personnel</field>
+            <field name="domain">[('code', '=like', '63%')]</field>
+        </record>
+        <record id="account_report_era_liasse_22" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.era_report_config')"/>
+            <field name="name">Rémunérations dirigeants</field>
+            <field name="domain">['|',('code', '=like', '634%'),('code', '=like', '636%')]</field>
+        </record>
+
+    </data>
+</odoo>

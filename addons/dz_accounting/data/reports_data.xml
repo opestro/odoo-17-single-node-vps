@@ -1,0 +1,919 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="liasse_fiscal_report_config" model="account.liasse.report_config">
+            <field name="name">LIASSE FISCAL</field>
+        </record>
+
+        <!---->
+
+        <record id="report_bilan_actif_1" model="report.bilan.actif">
+            <field name="name">ACTIFS NON COURANTS</field>
+        </record>
+        <record id="report_bilan_actif_2" model="report.bilan.actif">
+            <field name="name">Ecart d’acquisition ( goodwill )</field>
+            <field name="domain">[('code','=like','207%')]</field>
+            <field name="amortissement">['|', ('code', '=like', '2807%'), ('code', '=like', '2907%')]</field>
+        </record>
+        <record id="report_bilan_actif_3" model="report.bilan.actif">
+            <field name="name">Immobilisations incorporelles</field>
+            <field name="domain">[('code', '=like', '20%'), '!', ('code', '=like', '207%')]</field>
+            <field name="amortissement">['|', ('code', '=like', '280%'), ('code', '=like', '290%'), '!', ('code', '=like', '2807%'), '!', ('code', '=like', '2907%')]</field>
+        </record>
+        <record id="report_bilan_actif_4" model="report.bilan.actif">
+            <field name="name">Immobilisations corporelles</field>
+            <field name="domain"></field>
+            <field name="amortissement"></field>
+        </record>
+        <record id="report_bilan_actif_5" model="report.bilan.actif">
+            <field name="name">Terrains</field>
+            <field name="domain">[('code', '=like', '211%')]</field>
+            <field name="amortissement">['|', ('code', '=like', '2811%'), ('code', '=like', '2911%')]</field>
+        </record>
+        <record id="report_bilan_actif_6" model="report.bilan.actif">
+            <field name="name">Bâtiments</field>
+            <field name="domain">['|', ('code', '=like', '212%'), ('code', '=like', '213%')]</field>
+            <field name="amortissement">['|', ('code', '=like', '2812%'), '|', ('code', '=like', '2813%'), '|', ('code', '=like', '2912%'), ('code', '=like', '2913%')]</field>
+        </record>
+        <record id="report_bilan_actif_7" model="report.bilan.actif">
+            <field name="name">Autres immobilisations corporelles</field>
+            <field name="domain">[('code', '=like', '21%'), '!', ('code', '=like', '211%')
+                , '!', ('code', '=like', '212%'), '!', ('code', '=like', '213%')]
+            </field>
+            <field name="amortissement">['|', ('code', '=like', '281%'), ('code', '=like', '291%')
+                , '!', ('code', '=like', '2811%'), '!', ('code', '=like', '2812%')
+                , '!', ('code', '=like', '2813%')
+                , '!', ('code', '=like', '2911%'), '!', ('code', '=like', '2912%')
+                , '!', ('code', '=like', '2913%')
+                , '!', ('code', '=like', '213%')]
+            </field>
+        </record>
+        <record id="report_bilan_actif_8" model="report.bilan.actif">
+            <field name="name">Immobilisations en concession</field>
+            <field name="domain">[('code', '=like', '22%')]</field>
+            <field name="amortissement">['|', ('code', '=like', '282%'), ('code', '=like', '292%')]</field>
+        </record>
+        <record id="report_bilan_actif_9" model="report.bilan.actif">
+            <field name="name">Immobilisations en cours</field>
+            <field name="domain">[('code', '=like', '23%')]</field>
+            <field name="amortissement">[('code', '=like', '293%')]</field>
+        </record>
+        <record id="report_bilan_actif_10" model="report.bilan.actif">
+            <field name="name">Immobilisations financières</field>
+            <field name="domain"></field>
+            <field name="amortissement"></field>
+        </record>
+        <record id="report_bilan_actif_11" model="report.bilan.actif">
+            <field name="name">Titres mis en équivalence</field>
+            <field name="domain">[('code', '=like', '265%')]</field>
+            <field name="amortissement">[('code', '=like', '2965%')]</field>
+        </record>
+        <record id="report_bilan_actif_13" model="report.bilan.actif">
+            <field name="name">Autres participations et créances rattachées</field>
+            <field name="domain">[('code', '=like', '26%'), '!', ('code', '=like', '265%')
+                , '!', ('code', '=like', '269%')]
+            </field>
+            <field name="amortissement">[('code', '=like', '296%'), '!', ('code', '=like', '2965%'), '!', ('code', '=like', '2969%')]</field>
+        </record>
+        <record id="report_bilan_actif_14" model="report.bilan.actif">
+            <field name="name">Autres titres immobilisés</field>
+            <field name="domain">['|', ('code', '=like', '271%'), '|', ('code', '=like', '272%'), ('code', '=like', '273%')]</field>
+            <field name="amortissement">['|', ('code', '=like', '2971%'), '|', ('code', '=like', '2972%'), ('code', '=like', '2973%')]</field>
+        </record>
+        <record id="report_bilan_actif_15" model="report.bilan.actif">
+            <field name="name">Prêts et autres actifs financiers non courants</field>
+            <field name="domain">['|', ('code', '=like', '274%'), '|', ('code', '=like', '275%'), ('code', '=like', '276%')]</field>
+            <field name="amortissement">['|', ('code', '=like', '2974%'), '|', ('code', '=like', '2975%'), '|', ('code', '=like', '2976%'), ('code', '=like', '298%')]</field>
+        </record>
+        <record id="report_bilan_actif_16" model="report.bilan.actif">
+            <field name="name">Impôt différé actif</field>
+            <field name="domain">[('code', '=like', '133%')]</field>
+            <field name="amortissement"></field>
+        </record>
+        <record id="report_bilan_actif_17" model="report.bilan.actif">
+            <field name="name">TOTAL ACTIF NON COURANT</field>
+            <field name="domain"></field>
+            <field name="amortissement"></field>
+        </record>
+        <record id="report_bilan_actif_18" model="report.bilan.actif">
+            <field name="name">ACTIF COURANT</field>
+            <field name="domain"></field>
+            <field name="amortissement"></field>
+        </record>
+        <record id="report_bilan_actif_19" model="report.bilan.actif">
+            <field name="name">Stocks et encours</field>
+            <field name="domain">[('code', '=like', '3%'), '!', ('code', '=like', '39%')]</field>
+            <field name="amortissement">[('code', '=like', '39%')]</field>
+        </record>
+        <record id="report_bilan_actif_20" model="report.bilan.actif">
+            <field name="name">Créances et emplois assimilés</field>
+            <field name="domain"></field>
+            <field name="amortissement"></field>
+        </record>
+        <record id="report_bilan_actif_21" model="report.bilan.actif">
+            <field name="name">Clients</field>
+            <field name="domain">[('code', '=like', '41%'), '!', ('code', '=like', '419%')]</field>
+            <field name="amortissement">[('code', '=like', '491%')]</field>
+        </record>
+        <record id="report_bilan_actif_22" model="report.bilan.actif">
+            <field name="name">Autres débiteurs</field>
+            <field name="domain">[('code', '=like', '409%')]</field>
+            <field name="domain_debit">['|', ('code', '=like', '42%'), '|', ('code', '=like', '43%'),
+                '|', ('code', '=like', '441%'), '|', ('code', '=like', '442%'),
+                '|', ('code', '=like', '443%'), '|', ('code', '=like', '449%')
+                , '|', ('code', '=like', '45%'), '|', ('code', '=like', '46%')
+                , '|', ('code', '=like', '486%'), ('code', '=like', '489%')]
+            </field>
+            <field name="amortissement">['|', ('code', '=like', '495%'), ('code', '=like', '496%')]</field>
+        </record>
+        <record id="report_bilan_actif_23" model="report.bilan.actif">
+            <field name="name">Impôts et assimilés</field>
+            <field name="domain">['|', ('code', '=like', '444%'), '|', ('code', '=like', '445%'), ('code', '=like', '447%')]</field>
+            <field name="amortissement"></field>
+        </record>
+        <record id="report_bilan_actif_24" model="report.bilan.actif">
+            <field name="name">Autres créances et emplois assimilés</field>
+            <field name="domain">[('code', '=like', '48%'), '!', ('code', '=like', '486%'), '!', ('code', '=like', '489%')]</field>
+            <field name="amortissement"></field>
+        </record>
+        <record id="report_bilan_actif_25" model="report.bilan.actif">
+            <field name="name">Disponibilités et assimilés</field>
+            <field name="domain"></field>
+            <field name="amortissement"></field>
+        </record>
+        <record id="report_bilan_actif_26" model="report.bilan.actif">
+            <field name="name">Placements et autres actifs financiers courants</field>
+            <field name="domain">[('code', '=like', '50%'), '!', ('code', '=like', '509%')]</field>
+            <field name="amortissement"></field>
+        </record>
+        <record id="report_bilan_actif_27" model="report.bilan.actif">
+            <field name="name">Trésorerie</field>
+            <field name="domain_debit">['|', ('code', '=like', '51%'), ('code', '=like', '52%')]</field>
+            <field name="domain">['|', ('code', '=like', '53%'), ('code', '=like', '54%')]</field>
+            <field name="amortissement"></field>
+        </record>
+        <record id="report_bilan_actif_28" model="report.bilan.actif">
+            <field name="name">TOTAL ACTIF COURANT</field>
+            <field name="domain"></field>
+            <field name="amortissement"></field>
+        </record>
+
+        <record id="report_bilan_actif_29" model="report.bilan.actif">
+            <field name="name">TOTAL GENERAL ACTIF</field>
+            <field name="domain"></field>
+            <field name="amortissement"></field>
+        </record>
+
+        <!-- passif -->
+
+        <record id="report_bilan_passif_1" model="report.bilan.passif">
+            <field name="name">CAPITAUX PROPRES</field>
+            <field name="domain"></field>
+        </record>
+        <record id="report_bilan_passif_2" model="report.bilan.passif">
+            <field name="name">Capital emis</field>
+            <field name="domain">['|', ('code', '=like', '101%'), ('code', '=like', '108%')]</field>
+        </record>
+        <record id="report_bilan_passif_3" model="report.bilan.passif">
+            <field name="name">Capital non appelé</field>
+            <field name="domain">[('code', '=like', '109%')]</field>
+        </record>
+        <record id="report_bilan_passif_4" model="report.bilan.passif">
+            <field name="name">Primes et réserves</field>
+            <field name="domain">['|', ('code', '=like', '104%'), ('code', '=like', '106%')]</field>
+        </record>
+        <record id="report_bilan_passif_5" model="report.bilan.passif">
+            <field name="name">Ecart de réévaluation</field>
+            <field name="domain">[('code', '=like', '105%')]</field>
+        </record>
+        <record id="report_bilan_passif_6" model="report.bilan.passif">
+            <field name="name">Ecart d’équivalence</field>
+            <field name="domain">[('code', '=like', '107%')]</field>
+        </record>
+        <record id="report_bilan_passif_7" model="report.bilan.passif">
+            <field name="name">Résultat net - Résultat net part du groupe (1)</field>
+            <field name="domain">[('code', '=like', '12%')]</field>
+        </record>
+        <record id="report_bilan_passif_8" model="report.bilan.passif">
+            <field name="name">Report à nouveau</field>
+            <field name="domain">[('code', '=like', '11%')]</field>
+        </record>
+        <record id="report_bilan_passif_9" model="report.bilan.passif">
+            <field name="name">Part de la société consolidante (1)</field>
+            <field name="domain"></field>
+        </record>
+        <record id="report_bilan_passif_10" model="report.bilan.passif">
+            <field name="name">Part des minoritaires (1)</field>
+            <field name="domain"></field>
+        </record>
+        <record id="report_bilan_passif_11" model="report.bilan.passif">
+            <field name="name">PASSIFS NON-COURANTS</field>
+            <field name="domain"></field>
+        </record>
+        <record id="report_bilan_passif_13" model="report.bilan.passif">
+            <field name="name">Emprunts et dettes financières</field>
+            <field name="domain">['|', ('code', '=like', '16%'), ('code', '=like', '17%')]</field>
+        </record>
+        <record id="report_bilan_passif_14" model="report.bilan.passif">
+            <field name="name">Impôts différés et provisionnés</field>
+            <field name="domain">['|', ('code', '=like', '134%'), ('code', '=like', '155%')]</field>
+        </record>
+        <record id="report_bilan_passif_15" model="report.bilan.passif">
+            <field name="name">Autres dettes non courantes</field>
+            <field name="domain">[('code', '=like', '229%')]</field>
+        </record>
+        <record id="report_bilan_passif_16" model="report.bilan.passif">
+            <field name="name">Provisions et produits constatés d'avance</field>
+            <field name="domain">['|', ('code', '=like', '15%'), '|', ('code', '=like', '131%'), ('code', '=like', '132%'), '!', ('code', '=like', '155%')]</field>
+        </record>
+        <record id="report_bilan_passif_17" model="report.bilan.passif">
+            <field name="name">PASSIFS COURANTS</field>
+            <field name="domain"></field>
+        </record>
+        <record id="report_bilan_passif_18" model="report.bilan.passif">
+            <field name="name">Fournisseurs et comptes rattachés</field>
+            <field name="domain">[('code', '=like', '40%'), '!', ('code', '=like', '409%')]</field>
+        </record>
+        <record id="report_bilan_passif_19" model="report.bilan.passif">
+            <field name="name">Impôts</field>
+            <field name="domain_credit">['|', ('code', '=like', '444%'), '|', ('code', '=like', '445%'), ('code', '=like', '447%')]</field>
+        </record>
+        <record id="report_bilan_passif_20" model="report.bilan.passif">
+            <field name="name">Autres dettes</field>
+            <field name="domain_credit">['|', ('code', '=like', '42%'), '|', ('code', '=like', '43%'), '|', ('code', '=like', '440%'),
+                '|', ('code', '=like', '441%'), '|', ('code', '=like', '442%'), '|', ('code', '=like', '443%'),
+                '|', ('code', '=like', '448%'), '|', ('code', '=like', '449%'), '|', ('code', '=like', '45%'),
+                '|', ('code', '=like', '46%'), ('code', '=like', '48%')
+            </field>
+            <field name="domain">['|', ('code', '=like', '419%'), ('code', '=like', '509%')]</field>
+        </record>
+        <record id="report_bilan_passif_21" model="report.bilan.passif">
+            <field name="name">Trésorerie Passif</field>
+            <field name="domain_credit">['|', ('code', '=like', '51%'), ('code', '=like', '52%')]</field>
+        </record>
+
+
+
+
+        <!-- COMPTE RES LIASSE -->
+
+
+        <record id="account_report__liasse_27" model="report.compte.res">
+            <field name="name">Ventes de marchandises</field>
+            <field name="domain">[('code', '=like', '700%')]</field>
+        </record>
+        <record id="account_report__liasse_28" model="report.compte.res">
+            <field name="name">Produits fabriqués</field>
+            <field name="domain">['|',('code','=like','701%'),'|',('code','=like','702%'),('code', '=like', '703%')]</field>
+        </record>
+        <record id="account_report__liasse_29" model="report.compte.res">
+            <field name="name">Prestations de services</field>
+            <field name="domain">['|',('code','=like','705%'),('code', '=like', '706%')]</field>
+        </record>
+        <record id="account_report__liasse_30" model="report.compte.res">
+            <field name="name">Vente de travaux</field>
+            <field name="domain">[('code', '=like', '704%')]</field>
+        </record>
+        <record id="account_report__liasse_31" model="report.compte.res">
+            <field name="name">Produits annexes</field>
+            <field name="domain">[('code', '=like', '708%')]</field>
+        </record>
+        <record id="account_report__liasse_32" model="report.compte.res">
+            <field name="name">Rabais, remises, ristournes accordés</field>
+            <field name="domain">[('code', '=like', '709%')]</field>
+        </record>
+        <record id="account_report__liasse_33" model="report.compte.res">
+            <field name="name">Chiffre d’affaires net des Rabais, remises, ristournes</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_34" model="report.compte.res">
+            <field name="name">Production stockée ou déstockée</field>
+            <field name="domain">[('code', '=like', '72%')]</field>
+        </record>
+        <record id="account_report__liasse_35" model="report.compte.res">
+            <field name="name">Production immobilisée</field>
+            <field name="domain">[('code', '=like', '73%')]</field>
+        </record>
+        <record id="account_report__liasse_36" model="report.compte.res">
+            <field name="name">Subventions d'exploitation</field>
+            <field name="domain">[('code', '=like', '74%')]</field>
+        </record>
+        <record id="account_report__liasse_37" model="report.compte.res">
+            <field name="name">I-Production de l'exercice</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_38" model="report.compte.res">
+            <field name="name">Achats de marchandises vendues</field>
+            <field name="domain">[('code', '=like', '600%')]</field>
+        </record>
+        <record id="account_report__liasse_39" model="report.compte.res">
+            <field name="name">Matières premières</field>
+            <field name="domain">[('code', '=like', '601%')]</field>
+        </record>
+        <record id="account_report__liasse_40" model="report.compte.res">
+            <field name="name">Autres approvisionnements</field>
+            <field name="domain">[('code', '=like', '602%')]</field>
+        </record>
+        <record id="account_report__liasse_41" model="report.compte.res">
+            <field name="name">Variations des stocks</field>
+            <field name="domain">[('code', '=like', '603%')]</field>
+        </record>
+        <record id="account_report__liasse_42" model="report.compte.res">
+            <field name="name">Achats d'études et de prestations de services</field>
+            <field name="domain">[('code', '=like', '604%')]</field>
+        </record>
+        <record id="account_report__liasse_43" model="report.compte.res">
+            <field name="name">Autres consommations</field>
+            <field name="domain">['|',('code', '=like', '605%'),'|',('code', '=like', '606%'),'|',('code', '=like', '607%'),('code', '=like', '608%')]</field>
+        </record>
+        <record id="account_report__liasse_44" model="report.compte.res">
+            <field name="name">Rabais, remises, ristournes obtenus sur achats</field>
+            <field name="domain">[('code', '=like', '609%')]</field>
+        </record>
+        <record id="account_report__liasse_46" model="report.compte.res">
+            <field name="name">Services extérieurs</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_45" model="report.compte.res">
+            <field name="name">Sous traitance générale</field>
+            <field name="domain">[('code', '=like', '611%')]</field>
+        </record>
+        <record id="account_report__liasse_47" model="report.compte.res">
+            <field name="name">Locations</field>
+            <field name="domain">[('code', '=like', '613%')]</field>
+        </record>
+        <record id="account_report__liasse_48" model="report.compte.res">
+            <field name="name">Entretien réparations et maintenance</field>
+            <field name="domain">[('code', '=like', '615%')]</field>
+        </record>
+        <record id="account_report__liasse_49" model="report.compte.res">
+            <field name="name">Primes d'assurances</field>
+            <field name="domain">[('code', '=like', '616%')]</field>
+        </record>
+        <record id="account_report__liasse_50" model="report.compte.res">
+            <field name="name">Personnel extérieur à l'entreprise</field>
+            <field name="domain">[('code', '=like', '621%')]</field>
+        </record>
+        <record id="account_report__liasse_51" model="report.compte.res">
+            <field name="name">Rémunération d'intermédiaires et honoraires</field>
+            <field name="domain">[('code', '=like', '622')]</field>
+        </record>
+        <record id="account_report__liasse_52" model="report.compte.res">
+            <field name="name">Publicité</field>
+            <field name="domain">[('code', '=like', '623%')]</field>
+        </record>
+        <record id="account_report__liasse_53" model="report.compte.res">
+            <field name="name">Déplacements missions et réceptions</field>
+            <field name="domain">[('code', '=like', '625%')]</field>
+        </record>
+        <record id="account_report__liasse_54" model="report.compte.res">
+            <field name="name">Autres services</field>
+            <field name="domain">
+                ['|',('code', '=like', '610%'),'|',('code', '=like', '612%'),'|',('code', '=like', '614%'),
+                '|',('code', '=like', '617%'),'|',('code', '=like', '618%'),'|',('code', '=like', '61%'),
+                '|',('code', '=like', '620%'),'|',('code', '=like', '624%'),'|',('code', '=like', '626%'),
+                '|',('code', '=like', '627%'),'|',('code', '=like', '628%'),('code', '=like', '629%')]</field>
+        </record>
+        <record id="account_report__liasse_55" model="report.compte.res">
+            <field name="name">Rabais, remises, ristournes obtenus sur services extérieurs</field>
+            <field name="domain">[('code', '=like', '619%')]</field>
+        </record>
+        <record id="account_report__liasse_56" model="report.compte.res">
+            <field name="name">II-Consommations de l'exercice</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_57" model="report.compte.res">
+            <field name="name">III-Valeur ajoutée d'exploitation (I–II)</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_58" model="report.compte.res">
+            <field name="name">Charges de personnel</field>
+            <field name="domain">[('code', '=like', '63%')]</field>
+        </record>
+        <record id="account_report__liasse_59" model="report.compte.res">
+            <field name="name">Impôts et taxes et versements assimilés</field>
+            <field name="domain">[('code', '=like', '64%')]</field>
+        </record>
+        <record id="account_report__liasse_61" model="report.compte.res">
+            <field name="name">IV-Excédent brut d’exploitation</field>
+            <field name="domain"></field>
+        </record>
+
+        <!-- compte des resultat 2 -->
+
+        <record id="account_report__liasse_62" model="report.compte.res_two">
+            <field name="name">Autres produits opérationnels</field>
+            <field name="domain">[('code', '=like', '75%')]</field>
+        </record>
+        <record id="account_report__liasse_63" model="report.compte.res_two">
+            <field name="name">Autres charges opérationnelles</field>
+            <field name="domain">[('code', '=like', '65%')]</field>
+        </record>
+        <record id="account_report__liasse_64" model="report.compte.res_two">
+            <field name="name">Dotations aux amortissements</field>
+            <field name="domain">[('code', '=like', '68%')]</field>
+        </record>
+        <record id="account_report__liasse_65" model="report.compte.res_two">
+            <field name="name">Provision</field>
+            <field name="domain">[('code', '=like', '68%')]</field>
+        </record>
+        <record id="account_report__liasse_66" model="report.compte.res_two">
+            <field name="name">Pertes de valeur</field>
+            <field name="domain">[('code', '=like', '68%')]</field>
+        </record>
+        <record id="account_report__liasse_67" model="report.compte.res_two">
+            <field name="name">Reprise sur pertes de valeur et provisions</field>
+            <field name="domain">[('code', '=like', '78%')]</field>
+        </record>
+        <record id="account_report__liasse_68" model="report.compte.res_two">
+            <field name="name">V-Résultat opérationnel</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_69" model="report.compte.res_two">
+            <field name="name">Produits financiers</field>
+            <field name="domain">[('code', '=like', '76%')]</field>
+        </record>
+        <record id="account_report__liasse_70" model="report.compte.res_two">
+            <field name="name">Charges financières</field>
+            <field name="domain">[('code', '=like', '66%')]</field>
+        </record>
+        <record id="account_report__liasse_71" model="report.compte.res_two">
+            <field name="name">VI-Résultat financier</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_72" model="report.compte.res_two">
+            <field name="name">VII-Résultat ordinaire (V+VI)</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_73" model="report.compte.res_two">
+            <field name="name">Eléments extraordinaires (produits) (*)</field>
+            <field name="domain">[('code', '=like', '77%')]</field>
+        </record>
+        <record id="account_report__liasse_74" model="report.compte.res_two">
+            <field name="name">Eléments extraordinaires (Charges) (*)</field>
+            <field name="domain">[('code', '=like', '67%')]</field>
+        </record>
+        <record id="account_report__liasse_75" model="report.compte.res_two">
+            <field name="name">VIII-Résultat extraordinaire</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_76" model="report.compte.res_two">
+            <field name="name">Impôts exigibles sur résultats</field>
+            <field name="domain">['|',('code', '=like', '695%'),('code', '=like', '698%')]</field>
+        </record>
+        <record id="account_report__liasse_77" model="report.compte.res_two">
+            <field name="name">Impôts différés variations sur résultats</field>
+            <field name="domain">['|',('code', '=like', '692%'),('code', '=like', '693%')]</field>
+        </record>
+        <record id="account_report__liasse_78" model="report.compte.res_two">
+            <field name="name">IX-RESULTAT NET DE L'EXERCICE</field>
+            <field name="domain"></field>
+        </record>
+
+        <!-- 1/ mouvements de stocks  -->
+
+        <record id="account_report__liasse_79_a" model="report.stock.move">
+            <field name="name">Stocks de marchandises</field>
+            <field name="domain">[('code', '=like', '30%')]</field>
+        </record>
+        <record id="account_report__liasse_79" model="report.stock.move">
+            <field name="name">Matières et fournitures</field>
+            <field name="domain">[('code', '=like', '31%')]</field>
+        </record>
+        <record id="account_report__liasse_80" model="report.stock.move">
+            <field name="name">Autres approvisionnements</field>
+            <field name="domain">[('code', '=like', '32%')]</field>
+        </record>
+        <record id="account_report__liasse_81" model="report.stock.move">
+            <field name="name">Encours de production de biens</field>
+            <field name="domain">[('code', '=like', '33%')]</field>
+        </record>
+        <record id="account_report__liasse_82" model="report.stock.move">
+            <field name="name">Encours de production de services</field>
+            <field name="domain">[('code', '=like', '34%')]</field>
+        </record>
+        <record id="account_report__liasse_83" model="report.stock.move">
+            <field name="name">Stocks de produits</field>
+            <field name="domain">[('code', '=like', '35%')]</field>
+        </record>
+        <record id="account_report__liasse_84" model="report.stock.move">
+            <field name="name">Stocks provenant d'immobilisations</field>
+            <field name="domain">[('code', '=like', '36%')]</field>
+        </record>
+        <record id="account_report__liasse_85" model="report.stock.move">
+            <field name="name">Stocks à l'extérieur</field>
+            <field name="domain">[('code', '=like', '37%')]</field>
+        </record>
+
+        <!-- 1/ Stock INTERMITTENT  -->
+
+        <record id="account_report__liasse_79_a_intermittent" model="report.stock.intermittent">
+            <field name="name">Stocks de marchandises</field>
+            <field name="domain">[('code', '=like', '600%')]</field>
+        </record>
+        <record id="account_report__liasse_79_intermittent" model="report.stock.intermittent">
+            <field name="name">Matières et fournitures</field>
+            <field name="domain">[('code', '=like', '601%')]</field>
+        </record>
+        <record id="account_report__liasse_80_intermittent" model="report.stock.intermittent">
+            <field name="name">Autres approvisionnements</field>
+            <field name="domain">[('code', '=like', '602%')]</field>
+        </record>
+        <record id="account_report__liasse_81_intermittent" model="report.stock.intermittent">
+            <field name="name">Encours de production de biens</field>
+            <field name="domain">[('code', '=like', '33%')]</field>
+        </record>
+        <record id="account_report__liasse_82_intermittent" model="report.stock.intermittent">
+            <field name="name">Encours de production de services</field>
+            <field name="domain">[('code', '=like', '34%')]</field>
+        </record>
+        <record id="account_report__liasse_83_intermittent" model="report.stock.intermittent">
+            <field name="name">Stocks de produits</field>
+            <field name="domain">[('code', '=like', '35%')]</field>
+        </record>
+        <record id="account_report__liasse_84_intermittent" model="report.stock.intermittent">
+            <field name="name">Stocks provenant d'immobilisations</field>
+            <field name="domain">[('code', '=like', '36%')]</field>
+        </record>
+        <record id="account_report__liasse_85_intermittent" model="report.stock.intermittent">
+            <field name="name">Stocks à l'extérieur</field>
+            <field name="domain">[('code', '=like', '37%')]</field>
+        </record>
+
+        <!-- 2/ Tableau de la fluctuation de la production stockée : -->
+
+        <record id="account_report__liasse_85_fluctuation" model="report.fluctuation">
+            <field name="name">La fluctuation de la production stockée</field>
+            <field name="domain">[('code', '=like', '72%')]</field>
+        </record>
+
+        <!-- 3/ Charges de personnel... -->
+        <record id="account_report__liasse_86" model="report.charges">
+            <field name="name">Autres services</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_87" model="report.charges">
+            <field name="name">Charges locatives et charges de copropriété</field>
+            <field name="domain">[('code', '=like', '614%')]</field>
+        </record>
+        <record id="account_report__liasse_88" model="report.charges">
+            <field name="name">Etudes et recherches</field>
+            <field name="domain">[('code', '=like', '617%')]</field>
+        </record>
+        <record id="account_report__liasse_89" model="report.charges">
+            <field name="name">Documentation et divers</field>
+            <field name="domain">[('code', '=like', '618%')]</field>
+        </record>
+        <record id="account_report__liasse_90" model="report.charges">
+            <field name="name">Transports de biens et transport collectif du personnel</field>
+            <field name="domain">[('code', '=like', '624%')]</field>
+        </record>
+        <record id="account_report__liasse_91" model="report.charges">
+            <field name="name">Frais postaux et de télécommunications</field>
+            <field name="domain">[('code', '=like', '626%')]</field>
+        </record>
+        <record id="account_report__liasse_92" model="report.charges">
+            <field name="name">Services bancaires et assimilés</field>
+            <field name="domain">[('code', '=like', '627%')]</field>
+        </record>
+        <record id="account_report__liasse_93" model="report.charges">
+            <field name="name">Cotisations et divers</field>
+            <field name="domain">[('code', '=like', '628%')]</field>
+        </record>
+        <record id="account_report__liasse_94" model="report.charges">
+            <field name="name">Charges de personnel</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_95" model="report.charges">
+            <field name="name">Rémunérations du personnel</field>
+            <field name="domain">[('code', '=like', '631%')]</field>
+        </record>
+        <record id="account_report__liasse_96" model="report.charges">
+            <field name="name">Rémunérations de l'exploitant individuel (cas d'une EURL)</field>
+            <field name="domain">[('code', '=like', '634%')]</field>
+        </record>
+        <record id="account_report__liasse_97" model="report.charges">
+            <field name="name">Cotisations aux organismes sociaux</field>
+            <field name="domain">[('code', '=like', '635%')]</field>
+        </record>
+        <record id="account_report__liasse_98" model="report.charges">
+            <field name="name">Charges sociales de l'exploitant individuel (cas d'une EURL)</field>
+            <field name="domain">[('code', '=like', '636%')]</field>
+        </record>
+        <record id="account_report__liasse_99" model="report.charges">
+            <field name="name">Autres charges sociales</field>
+            <field name="domain">[('code', '=like', '637%')]</field>
+        </record>
+        <record id="account_report__liasse_100" model="report.charges">
+            <field name="name">Autres charges de personnels</field>
+            <field name="domain">[('code', '=like', '638%')]</field>
+        </record>
+        <record id="account_report__liasse_101" model="report.charges">
+            <field name="name">Impôts, taxes et versements assimilés</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_102" model="report.charges">
+            <field name="name">Impôts, taxes et versements assimilés sur rémunérations</field>
+            <field name="domain">[('code', '=like', '641%')]</field>
+        </record>
+        <record id="account_report__liasse_103" model="report.charges">
+            <field name="name">Impôts et taxes non récupérables sur chiffres d'affaires</field>
+            <field name="domain">[('code', '=like', '642%')]</field>
+        </record>
+        <record id="account_report__liasse_104" model="report.charges">
+            <field name="name">Autres impôts et taxes hors impôts sur les résultats</field>
+            <field name="domain">[('code', '=like', '645%')]</field>
+        </record>
+        <!-- 4/ Autres charges et produits opérationnels  -->
+
+        <record id="account_report__liasse_105" model="report.charges.others">
+            <field name="name">Autres charges opérationnelles</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_106" model="report.charges.others">
+            <field name="name">Redevances pour concessions, brevets, licences, logiciels et valeurs similaires</field>
+            <field name="domain">[('code', '=like', '651%')]</field>
+        </record>
+        <record id="account_report__liasse_107" model="report.charges.others">
+            <field name="name">Moins values sur sorties d'actifs immobilisés non financiers</field>
+            <field name="domain">[('code', '=like', '652%')]</field>
+        </record>
+        <record id="account_report__liasse_108" model="report.charges.others">
+            <field name="name">Jetons de présence</field>
+            <field name="domain">[('code', '=like', '653%')]</field>
+        </record>
+        <record id="account_report__liasse_109" model="report.charges.others">
+            <field name="name">Perte sur créances irrécouvrables</field>
+            <field name="domain">[('code', '=like', '654%')]</field>
+        </record>
+        <record id="account_report__liasse_110" model="report.charges.others">
+            <field name="name">Quote-part de résultat sur opérations faites en commun</field>
+            <field name="domain">[('code', '=like', '655%')]</field>
+        </record>
+        <record id="account_report__liasse_111" model="report.charges.others">
+            <field name="name">Amendes et pénalités subventions accordées dons et libéralités</field>
+            <field name="domain">[('code', '=like', '656%')]</field>
+        </record>
+        <record id="account_report__liasse_112" model="report.charges.others">
+            <field name="name">Charges exceptionnelles de gestion courante</field>
+            <field name="domain">[('code', '=like', '657%')]</field>
+        </record>
+        <record id="account_report__liasse_113" model="report.charges.others">
+            <field name="name">Autres charges de gestion courante</field>
+            <field name="domain">[('code', '=like', '658%')]</field>
+        </record>
+        <record id="account_report__liasse_114" model="report.charges.others">
+            <field name="name">Autres produits opérationnels Montants</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_115" model="report.charges.others">
+            <field name="name">Redevances pour concessions, brevets, licences, logiciels et valeurs similaires</field>
+            <field name="domain">[('code', '=like', '751%')]</field>
+        </record>
+        <record id="account_report__liasse_116" model="report.charges.others">
+            <field name="name">Plus values sur sorties d'actifs immobilisés non financiers</field>
+            <field name="domain">[('code', '=like', '752%')]</field>
+        </record>
+        <record id="account_report__liasse_117" model="report.charges.others">
+            <field name="name">Jetons de présence et rémunérations d'administrateurs ou de gérant</field>
+            <field name="domain">[('code', '=like', '753%')]</field>
+        </record>
+        <record id="account_report__liasse_118" model="report.charges.others">
+            <field name="name">Quotes-parts de subventions d'investissement virées au résultat de l'exercice</field>
+            <field name="domain">[('code', '=like', '754%')]</field>
+        </record>
+        <record id="account_report__liasse_119" model="report.charges.others">
+            <field name="name">Quote-part de résultat sur opérations faites en commun</field>
+            <field name="domain">[('code', '=like', '755%')]</field>
+        </record>
+        <record id="account_report__liasse_120" model="report.charges.others">
+            <field name="name">Rentrée sur créances amorties</field>
+            <field name="domain">[('code', '=like', '756%')]</field>
+        </record>
+        <record id="account_report__liasse_121" model="report.charges.others">
+            <field name="name">Produits exceptionnels sur opérations de gestion</field>
+            <field name="domain">[('code', '=like', '757%')]</field>
+        </record>
+        <record id="account_report__liasse_122" model="report.charges.others">
+            <field name="name">Autres produits de gestion courante</field>
+            <field name="domain">[('code', '=like', '758%')]</field>
+        </record>
+
+        <!-- 5/ Tableau des amortissements -->
+
+        <record id="account_report__liasse_123" model="report.amortissement">
+            <field name="name">Goodwill</field>
+            <field name="domain">[('code','=like','2807%')]</field>
+        </record>
+        <record id="account_report__liasse_124" model="report.amortissement">
+            <field name="name">Immobilisations incorporelles</field>
+            <field name="domain">[('code', '=like', '280%'),'!',('code', '=like', '2807%')]</field>
+        </record>
+        <record id="account_report__liasse_125" model="report.amortissement">
+            <field name="name">Immobilisations corporelles</field>
+            <field name="domain">[('code', '=like', '281%')]</field>
+        </record>
+        <record id="account_report__liasse_126" model="report.amortissement">
+            <field name="name">Participations</field>
+            <field name="domain">[('code', '=like', '286%')]</field>
+        </record>
+        <record id="account_report__liasse_127" model="report.amortissement">
+            <field name="name">Autres actifs financiers non courants</field>
+            <field name="domain">[('code', '=like', '287%')]</field>
+        </record>
+
+        <!--6/ IMMOBILISATION-->
+
+        <record id="account_report__liasse_128" model="report.immobilisation">
+            <field name="name">Goodwill</field>
+            <field name="domain">[('code','=like','207%')]</field>
+        </record>
+        <record id="account_report__liasse_129" model="report.immobilisation">
+            <field name="name">Immobilisations incorporelles</field>
+            <field name="domain">[('code', '=like', '20%'),'!',('code', '=like', '207%')]</field>
+        </record>
+        <record id="account_report__liasse_130" model="report.immobilisation">
+            <field name="name">Immobilisations corporelles</field>
+            <field name="domain">[('code', '=like', '21%')]</field>
+        </record>
+        <record id="account_report__liasse_131" model="report.immobilisation">
+            <field name="name">Participations</field>
+            <field name="domain">[('code', '=like', '26%')]</field>
+        </record>
+        <record id="account_report__liasse_132" model="report.immobilisation">
+            <field name="name">Autres actifs financiers non courants</field>
+            <field name="domain">[('code', '=like', '27%'),'!',('code', '=like', '275%'),'!',('code', '=like', '279%')]</field>
+        </record>
+
+        <!-- 7/ Tableau des immobilisations cédées -->
+
+        <record id="account_report__liasse_133" model="report.immobilisation">
+            <field name="name"></field>
+            <field name="domain"></field>
+        </record>
+
+        <!-- 8/ Tableau des provisions et pertes de valeurs -->
+
+        <record id="account_report__liasse_134" model="report.provision.line">
+            <field name="name">-Pertes de valeurs sur stocks (à détailler pour chaque catégorie de stock sur état annexe)</field>
+        </record>
+        <record id="account_report__liasse_135" model="report.provision.line">
+            <field name="name">-Pertes de valeurs sur créances (1)</field>
+        </record>
+        <record id="account_report__liasse_136" model="report.provision.line">
+            <field name="name">-Pertes de valeurs sur actions et parts sociales (1)</field>
+        </record>
+        <record id="account_report__liasse_137" model="report.provision.line">
+            <field name="name">-Provisions pour pensions et obligations similaires</field>
+        </record>
+        <record id="account_report__liasse_138" model="report.provision.line">
+            <field name="name">-Provisions sur litiges</field>
+        </record>
+        <record id="account_report__liasse_139" model="report.provision.line">
+            <field name="name">-Autres provisions liées au personnel</field>
+        </record>
+        <record id="account_report__liasse_140" model="report.provision.line">
+            <field name="name">-Provisions pour impôts</field>
+        </record>
+        <record id="account_report__liasse_141" model="report.provision.line">
+            <field name="name">-Autres provisions à détailler sur états annexes</field>
+        </record>
+
+        <!-- 9/ Tableau de détermination du résultat fiscal -->
+
+        <record id="account_report__liasse_142" model="report.res.fiscal">
+            <field name="name">II. Réintégrations</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_143" model="report.res.fiscal">
+            <field name="name">Charges des immeubles non affectés directement à l'exploitation</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_144" model="report.res.fiscal">
+            <field name="name">Quote–part des cadeaux publicitaires non déductibles</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_145" model="report.res.fiscal">
+            <field name="name">Quote–part du sponsoring et parrainage non déductibles</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_146" model="report.res.fiscal">
+            <field name="name">Frais de réception non déductibles</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_147" model="report.res.fiscal">
+            <field name="name">Cotisations et dons non déductibles</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_148" model="report.res.fiscal">
+            <field name="name">Impôts et taxes non déductibles</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_149" model="report.res.fiscal">
+            <field name="name">Provisions non déductibles</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_150" model="report.res.fiscal">
+            <field name="name">Amortissements non déductibles</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_151" model="report.res.fiscal">
+            <field name="name">Quote-part des frais de recherche développement non déductibles</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_152" model="report.res.fiscal">
+            <field name="name">Amortissements non déductibles liés aux opérations de crédit bail (Preneur) (cf.art 27 de LFC 2010)</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_153" model="report.res.fiscal">
+            <field name="name">Loyers hors produits financiers (bailleur) (cf.art 27 de LFC 2010)</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_154" model="report.res.fiscal">
+            <field name="name">Impôts sur les bénéfices des sociétés</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_155" model="report.res.fiscal">
+            <field name="name">Impôt exigible sur le résultat</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_156" model="report.res.fiscal">
+            <field name="name">Impôt différé (variation)</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_157" model="report.res.fiscal">
+            <field name="name">Pertes de valeurs non déductibles</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_158" model="report.res.fiscal">
+            <field name="name">Amendes et pénalités</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_159" model="report.res.fiscal">
+            <field name="name">Autres réintégrations (*)</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_160" model="report.res.fiscal">
+            <field name="name">Déductions</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_161" model="report.res.fiscal">
+            <field name="name">Plus values sur cession d'éléments d'actif immobilisés (cf.art 173 du CIDTA)</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_162" model="report.res.fiscal">
+            <field name="name">Les produits et les plus values de cession des actions et titre assimilés ainsi que ceux des actions ou part d'OPCVM cotées en bourse.</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_163" model="report.res.fiscal">
+            <field name="name">impôt sur les bénéfices des sociétés ou expressément exonérés (cf.art 147 bis du CIDTA)</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_164" model="report.res.fiscal">
+            <field name="name">Amortissements liés aux opérations de crédit bail (Bailleur) (cf.art 27 de LFC 2010)</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_165" model="report.res.fiscal">
+            <field name="name">Loyers hors charges financières (Preneur) (cf.art 27 de LFC 2010)</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_166" model="report.res.fiscal">
+            <field name="name">Complément d'amortissements</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_167" model="report.res.fiscal">
+            <field name="name">Autres déductions (*)</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_168" model="report.res.fiscal">
+            <field name="name">IV. Déficits antérieurs à déduire (cf.art 147 du CIDTA)</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_169" model="report.res.fiscal">
+            <field name="name">Déficit de l'année 20</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_170" model="report.res.fiscal">
+            <field name="name">Déficit de l'année 20</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_171" model="report.res.fiscal">
+            <field name="name">Déficit de l'année 20</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report__liasse_172" model="report.res.fiscal">
+            <field name="name">Déficit de l'année 20</field>
+            <field name="domain"></field>
+        </record>
+
+
+        <!-- 10/ Tableau d’affectation du résultat et des réserves  -->
+
+
+
+        <!-- 11/ Tableau des participations (filiales et entités associées) -->
+
+
+    </data>
+</odoo>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="account_update_lock_date_form_view">
+        <field name="name">account.close.entry.form</field>
+        <field name="model">account.close.entry</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="exercice_id" />
+                    <field name="account_id" required="1" />
+                    <field name="journal_id" required="1" />
+                </group>
+                <footer>
+                    <button string="Confirmer" name="execute" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="account_close_entry_act_window">
+        <field name="name">Clôture des comptes</field>
+        <field name="res_model">account.close.entry</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record model="ir.ui.view" id="account_update_lock_date_form_view_confirm">
+        <field name="name">account.lock.date.form</field>
+        <field name="model">account.lock.date</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                     <span>Etes-vous certain de vouloir procéder?</span>
+                    <field name="company_id" invisible="1"/>
+                    <field name="period_lock_date" invisible="1"/>
+                    <field name="fiscalyear_lock_date" invisible="1"/>
+
+                </group>
+                <footer>
+                    <button string="Update" name="execute" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="account_update_lock_date_act_window_confirm">
+        <field name="name">Avertissement</field>
+        <field name="res_model">account.lock.date</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="account_update_lock_date_form_view_confirm"/>
+        <field name="target">new</field>
+    </record>
+
+    <record model="ir.ui.view" id="account_update_lock_date_form_view_ext">
+        <field name="name">account.lock.date.form</field>
+        <field name="model">account.lock.date</field>
+        <field name="inherit_id" ref="base_accounting_kit.account_update_lock_date_form_view"/>
+        <field name="arch" type="xml">
+                    <button name="execute" position="replace">
+                        <button name="%(account_update_lock_date_act_window_confirm)d"
+                                type="action"
+                                string="update"
+                                class="btn-primary"
+                                context="{'confirm':True,'company_id': company_id, 'period_lock_date': period_lock_date, 'fiscalyear_lock_date':fiscalyear_lock_date}">
+                        </button>
+                    </button>
+        </field>
+    </record>
+
+    <menuitem id="menu_close_entry"
+              name="Clôture d'exercice"
+              action="account_close_entry_act_window"
+              parent="account.menu_finance_entries_actions"
+              groups="account.group_account_manager"/>
+
+</odoo>

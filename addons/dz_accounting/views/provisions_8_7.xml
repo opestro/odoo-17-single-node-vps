@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <!--7/Cessions-->
+        <record id="form_view_report_cession_form" model="ir.ui.view">
+            <field name="name">report.cession.view</field>
+            <field name="model">report.cession</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <label for="date_from" string="Period"/>
+                            <div>
+                                <field name="date_from" class="oe_inline"/> - <field name="date_to" class="oe_inline"/>
+                            </div>
+                        </group>
+                            <field name="line_ids" nolabel="1" >
+                                <tree editable="bottom">
+                                    <field name="asset_id"/>
+                                    <field name="date"/>
+                                    <field name="net_amount"/>
+                                    <field name="amortissement"/>
+                                    <field name="cesssion_amount"/>
+                                </tree>
+                            </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--8/provisions-->
+        <record id="form_view_report_provision_form" model="ir.ui.view">
+            <field name="name">report.provision.view</field>
+            <field name="model">report.provision</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <label for="date_from" string="Period"/>
+                            <div>
+                                <field name="date_from" class="oe_inline"/> - <field name="date_to" class="oe_inline"/>
+                            </div>
+                        </group>
+                            <field name="line_ids" nolabel="1" >
+                                <tree editable="bottom" delete="0" create="0">
+                                    <field name="name"/>
+                                    <field name="provision_cumul"/>
+                                    <field name="dotation_exercice"/>
+                                    <field name="reprise_exercice"/>
+                                </tree>
+                            </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+
+
+    </data>
+</odoo>

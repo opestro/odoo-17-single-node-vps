@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tvcp_report_config" model="account.liasse.report_config">
+            <field name="name">TVCP: TABLEAU DE VARIATION DES CAPITAUX PROPRES</field>
+            <field name="type" eval="'tvcp'"/>
+        </record>
+    </data>
+</odoo>

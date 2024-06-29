@@ -1,0 +1,96 @@
+<odoo>
+
+    <record id="view_bank_releve_form" model="ir.ui.view">
+        <field name="name">bank.releve.form</field>
+        <field name="model">bank.releve</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" />
+                    <button string="Validate" name="action_validate" invisible="state != 'draft'"  type="object" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" required="1" />
+                            <field name="date_from" required="1" />
+                            <field name="date" required="1" />
+                            <field name="journal_id" required="1" />
+                            <field name="company_id"  invisible="1"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="balance_start" />
+                            <field name="balance_end" />
+                        </group>
+                        <group>
+                            <field name="bank_balance_start" />
+                            <field name="bank_balance_end" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Rapprochements">
+                            <p style="font-weight:bolder">Opérations figurants pas sur le relevé bancaire</p>
+                            <field nolabel="1" name="account_move_lines" options="{'no_open':True,'no_create':True}" >
+                                <tree edit="0">
+                                    <field name="date" optional="show"/>
+                                    <field name="company_id" invisible="1" groups="base.group_multi_company"/>
+                                    <field name="account_id" options="{'no_open': True}" groups="account.group_account_user"/>
+                                    <field name="partner_id" optional="show"/>
+                                    <field name="ref" optional="show"/>
+                                    <field name="name" optional="show"/>
+                                    <field name="debit" sum="Total Debit"/>
+                                    <field name="credit" sum="Total Credit"/>
+                                    <field name="amount_currency" invisible="1" optional="hide"/>
+                                    <field name="full_reconcile_id" invisible="1" optional="show"/>
+                                    <field name="reconcile_model_id" invisible="1"/>
+                                    <field name="reconciled" invisible="1"/>
+                                    <field name="currency_id" readonly="1" invisible="1"/>
+                                    <field name="company_currency_id" invisible="1"/>
+                                    <field name="parent_state" invisible="1"/>
+                                </tree>
+                            </field>
+                            <p style="font-weight:bolder">Opérations figurants pas sur notre comptabilité</p>
+                            <field nolabel="1" name="bank_lines">
+                                <tree editable="button">
+                                    <field name="date" />
+                                    <field name="name" />
+                                    <field name="partner_id" />
+                                    <field name="account_id" />
+                                    <field name="debit" />
+                                    <field name="credit" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_bank_releve_tree" model="ir.ui.view">
+        <field name="name">bank.releve.form</field>
+        <field name="model">bank.releve</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="date" />
+                <field name="journal_id" />
+                <field name="company_id"  invisible="1"/>
+                <field name="currency_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+    <record id="action_bank_releve" model="ir.actions.act_window">
+        <field name="name">Rapprochement bancaire</field>
+        <field name="res_model">bank.releve</field>
+        <field name="view_id" ref="view_bank_releve_tree"/>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_bank_releve" name="Rapprochement bancaire" parent="account.menu_finance_reports" action="action_bank_releve"/>
+
+
+</odoo>

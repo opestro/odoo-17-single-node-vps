@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+
+        <!--RES CONF SETTINGS-->
+
+        <record id="res_config_settings_view_form_timbre" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.account</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//app[@name='account']/block" position="after">
+                    <!--g50-->
+                    <h2>G-50</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Comptes comptable (constataion G50)</span>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label for="tap_debit_account_id" class="col-lg-3 o_light_label"/>
+                                        <field name="tap_debit_account_id"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="tap_credit_account_id" class="col-lg-3 o_light_label"/>
+                                        <field name="tap_credit_account_id"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="tva_debit_account_id" class="col-lg-3 o_light_label"/>
+                                        <field name="tva_debit_account_id"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="tva_credit_account_id" class="col-lg-3 o_light_label"/>
+                                        <field name="tva_credit_account_id"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="ibs_credit_account_id" class="col-lg-3 o_light_label"/>
+                                        <field name="ibs_credit_account_id"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="ibs_debit_account_id" class="col-lg-3 o_light_label"/>
+                                        <field name="ibs_debit_account_id"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="irg_debit_account_id" class="col-lg-3 o_light_label"/>
+                                        <field name="irg_debit_account_id"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label for="fait_generateur" class="col-lg-3 o_light_label"/>
+                                        <field name="fait_generateur"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="tap_percentage" class="col-lg-3 o_light_label"/>
+                                        <field name="tap_percentage"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="tap_refaction" class="col-lg-3 o_light_label"/>
+                                        <field name="tap_refaction"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="precompte" class="col-lg-3 o_light_label"/>
+                                        <field name="precompte"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="tva_code" class="col-lg-3 o_light_label"/>
+                                        <field name="tva_code"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="tap_code" class="col-lg-3 o_light_label"/>
+                                        <field name="tap_code"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="percentage_ibs" class="col-lg-3 o_light_label"/>
+                                        <field name="percentage_ibs"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="start_year_ibs" class="col-lg-3 o_light_label"/>
+                                        <field name="start_year_ibs"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Info-G50</span>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label for="wilaya" class="col-lg-3 o_light_label"/>
+                                        <field name="wilaya"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="commune" class="col-lg-3 o_light_label"/>
+                                        <field name="commune"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="inspection" class="col-lg-3 o_light_label"/>
+                                        <field name="inspection"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="recette" class="col-lg-3 o_light_label"/>
+                                        <field name="recette"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

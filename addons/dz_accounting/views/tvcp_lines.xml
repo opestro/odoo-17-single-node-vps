@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="form_view_report_tvcp_line_form" model="ir.ui.view">
+            <field name="name">report.tvcp.view</field>
+            <field name="model">report.tvcp</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="exercice_id"/>
+                        </group>
+                        <group string="Solde au 31/12/N-2">
+                            <field name="Capital_social_1" />
+                            <field name="Prime_emission_1" />
+                            <field name="Ecart_Evaluation_1" />
+                            <field name="EcartReevaluation_1" />
+                            <field name="ResevesResultats_1" />
+                        </group>
+                        <group string="Changement méthode comptable N-1">
+                            <field name="Capital_social_2" />
+                            <field name="Prime_emission_2" />
+                            <field name="Ecart_Evaluation_2" />
+                            <field name="EcartReevaluation_2" />
+                            <field name="ResevesResultats_2" />
+                        </group>
+                        <group string="Correction d'erreurs significatives N-1">
+                            <field name="Capital_social_22" />
+                            <field name="Prime_emission_22" />
+                            <field name="Ecart_Evaluation_22" />
+                            <field name="EcartReevaluation_22" />
+                            <field name="ResevesResultats_22" />
+                        </group>
+                        <group string="Réévaluation des immobilisations N-1">
+                            <field name="Capital_social_3" />
+                            <field name="Prime_emission_3" />
+                            <field name="Ecart_Evaluation_3" />
+                            <field name="EcartReevaluation_3" />
+                            <field name="ResevesResultats_3" />
+                        </group>
+                        <group string="Profits ou pertes non comptabilisés dans le compte de résultat N-1">
+                            <field name="Capital_social_4" />
+                            <field name="Prime_emission_4" />
+                            <field name="Ecart_Evaluation_4" />
+                            <field name="EcartReevaluation_4" />
+                            <field name="ResevesResultats_4" />
+                        </group>
+                        <group string="Dividendes payés  N-1">
+                            <field name="Capital_social_5" />
+                            <field name="Prime_emission_5" />
+                            <field name="Ecart_Evaluation_5" />
+                            <field name="EcartReevaluation_5" />
+                            <field name="ResevesResultats_5" />
+                        </group>
+                        <group string="Augmentation de capital">
+                            <field name="Capital_social_6" />
+                            <field name="Prime_emission_6" />
+                            <field name="Ecart_Evaluation_6" />
+                            <field name="EcartReevaluation_6" />
+                            <field name="ResevesResultats_6" />
+                        </group>
+                        <group string="Résultat net de l'exercice  N-1">
+                            <field name="Capital_social_7" />
+                            <field name="Prime_emission_7" />
+                            <field name="Ecart_Evaluation_7" />
+                            <field name="EcartReevaluation_7" />
+                            <field name="ResevesResultats_7" />
+                        </group>
+                        <group string="Changement méthode comptable N">
+                            <field name="Capital_social_8" />
+                            <field name="Prime_emission_8" />
+                            <field name="Ecart_Evaluation_8" />
+                            <field name="EcartReevaluation_8" />
+                            <field name="ResevesResultats_8" />
+                        </group>
+                        <group string="Correction d'erreurs significatives N">
+                            <field name="Capital_social_9" />
+                            <field name="Prime_emission_9" />
+                            <field name="Ecart_Evaluation_9" />
+                            <field name="EcartReevaluation_9" />
+                            <field name="ResevesResultats_9" />
+                        </group>
+                        <group string="Réévaluation des immobilisations N">
+                            <field name="Capital_social_10" />
+                            <field name="Prime_emission_10" />
+                            <field name="Ecart_Evaluation_10" />
+                            <field name="EcartReevaluation_10" />
+                            <field name="ResevesResultats_10" />
+                        </group>
+                        <group string="Profits ou pertes non comptabilisés dans le compte de résultat N">
+                            <field name="Capital_social_11" />
+                            <field name="Prime_emission_11" />
+                            <field name="Ecart_Evaluation_11" />
+                            <field name="EcartReevaluation_11" />
+                            <field name="ResevesResultats_11" />
+                        </group>
+                        <group string="Dividendes payés  N">
+                            <field name="Capital_social_12" />
+                            <field name="Prime_emission_12" />
+                            <field name="Ecart_Evaluation_12" />
+                            <field name="EcartReevaluation_12" />
+                            <field name="ResevesResultats_12" />
+                        </group>
+                        <group string="Augmentation de capital N">
+                            <field name="Capital_social_13" />
+                            <field name="Prime_emission_13" />
+                            <field name="Ecart_Evaluation_13" />
+                            <field name="EcartReevaluation_13" />
+                            <field name="ResevesResultats_13" />
+                        </group>
+                        <group string="Résultat net de l'exercice  N">
+                            <field name="Capital_social_14" />
+                            <field name="Prime_emission_14" />
+                            <field name="Ecart_Evaluation_14" />
+                            <field name="EcartReevaluation_14" />
+                            <field name="ResevesResultats_14" />
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

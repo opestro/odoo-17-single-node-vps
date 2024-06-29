@@ -1,0 +1,182 @@
+<odoo>
+
+    <record id="update_g50_wizard" model="ir.ui.view">
+        <field name="name">plan wizard</field>
+        <field name="model">update.g50.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="ca_imposable"/>
+                            <field name="tap"/>
+                            <field name="timbre"/>
+                            <field name="ibs"/>
+                            <field name="irg"/>
+                            <field name="tva"/>
+                            <field name="tva_purchase"/>
+                            <field name="tva_sale"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_launch" string="Confirm" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="update_g50_wizard_action" model="ir.actions.act_window">
+        <field name="name">Confirm Update</field>
+        <field name="res_model">update.g50.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="dz_accounting.update_g50_wizard"/>
+    </record>
+
+    <!--*************************** G50 *************************************-->
+
+    <record id="view_declaration_g50_form" model="ir.ui.view">
+        <field name="name">declaration.g50.form</field>
+        <field name="model">declaration.g50</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar"  options="{'clickable': '0'}" statusbar_visible="draft,posted,paid"/>
+                    <button name="action_post" invisible="state != 'draft' or id == False" string="Confirmer" type="object" class="oe_highlight" />
+                    <button name="action_calculate" invisible="state != 'draft' or id == False" string="Calculer G50" type="object" class="oe_highlight" />
+                    <button name="action_register_payment"  invisible="state != 'posted'" string="Enregistrer le règlement"  type="object" class="oe_highlight" />
+                    <button name="action_draft" invisible="state != 'posted'" string="Remettre en brouillon" type="object"/>
+                    <button name="action_print" string="Imprimer" type="object" class="oe_highlight" invisible="id == False" />
+                    <button invisible="state != 'draft' or id == False" type="action"
+                            name="%(dz_accounting.update_g50_wizard_action)d"
+                            context="{'declaration_id': id, 'default_ca_imposable':ca_imposable,'default_tap':tap,'default_ibs':ibs,'default_timbre':timbre,'default_irg':irg,'default_tva':tva,'default_tva_sale':tva_sale,'default_tva_purchase':tva_purchase}"
+                            string="Modifier" icon="fa-arrow-right" class="oe_highlight"
+                            groups="base.group_erp_manager"
+                    />
+
+                    <field name="id" invisible="1"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Paid" invisible="state != 'paid'" />
+                    <group>
+                        <group>
+                            <field name="month"/>
+                            <field name="exercice_id"/>
+                            <field name="year" force_save="1" />
+                        </group>
+                        <group>
+                            <field name="declaration_date"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field readonly="1" name="ca_imposable"/>
+                            <field readonly="1" name="tap"/>
+                            <field readonly="1" name="timbre"/>
+                            <field readonly="1" name="irg"/>
+                        </group>
+                        <group>
+                            <field readonly="1" name="ibs"/>
+                            <field readonly="1" name="tva_sale"/>
+                            <field readonly="1" name="tva_purchase"/>
+                            <field readonly="1" name="last_g50_tva" invisible="last_g50_tva >= 0"  />
+                            <field readonly="1" name="tva"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Paiements encaissés">
+                            <field name="received_payment_ids" options="{'link': false, 'unlink': false}">
+                                <tree editable="top" create="0" delete="0">
+                                    <field readonly="1" name="date" />
+                                    <field readonly="1" name="name" />
+                                    <field readonly="1" name="journal_id" />
+                                    <field readonly="1" name="suitable_journal_ids" invisible="1"/>
+                                    <field readonly="1" name="partner_id" />
+                                    <field readonly="1" name="amount" />
+                                    <field name="tva_percent"  />
+                                    <field name="tva_amount" string="TVA collectée" sum="Total TVA déductible" />
+                                    <field name="tap_percent" />
+                                    <field name="tap_amount" sum="Total TAP" />
+                                    <field name="ca" optional="hide" />
+                                    <field name="state" invisible="1" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Réglements effectués" >
+                                <field name="sent_payment_ids" options="{'link': false, 'unlink': false}">
+                                    <tree editable="top" create="0" delete="0">
+                                        <field readonly="1" name="date" />
+                                        <field readonly="1" name="name" />
+                                        <field readonly="1" name="journal_id" />
+                                        <field readonly="1" name="suitable_journal_ids" invisible="1"/>
+                                        <field readonly="1" name="partner_id" />
+                                        <field readonly="1" name="amount" />
+                                        <field name="tva_percent" />
+                                        <field name="tva_amount" string="TVA déductible" sum="Total TVA déductible" />
+                                        <field name="state" invisible="1" />
+                                        <field name="ca" optional="hide" readonly="1" />
+                                    </tree>
+                                </field>
+                        </page>
+                        <page string="Comptabilité">
+                            <group>
+                                <group>
+                                    <field readonly="1" name="posted_move_id"/>
+                                </group>
+                                <group>
+                                    <field readonly="1" name="paying_move_id"/>
+                                    <field readonly="1" name="payment_id"/>
+                                    <!--<field name="paying_account_id"/>-->
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                    <group class="oe_right">
+                        <group class="oe_subtotal_footer">
+                            <field readonly="1" class="oe_subtotal_footer_separator" name="amount_total"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="view_declaration_g50_tree" model="ir.ui.view">
+        <field name="name">declaration.g50.tree.</field>
+        <field name="model">declaration.g50</field>
+        <field name="arch" type="xml">
+            <tree decoration-info="state == 'draft'"
+                  decoration-success="state == 'paid'"
+                  decoration-muted="state == 'cancel'">
+                <field name="month"/>
+                <field name="year"/>
+                <field name="declaration_date"/>
+                <field name="tap" sum="Total"/>
+                <field name="timbre" sum="Total"/>
+                <field name="ibs" sum="Total"/>
+                <field name="irg" sum="Total"/>
+                <field name="tva_sale" sum="Total"/>
+                <field name="tva_purchase" sum="Total"/>
+                <field name="tva" sum="Total"/>
+                <field readonly="1" name="amount_total" sum="Total"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record id="action_declaration_g50" model="ir.actions.act_window">
+        <field name="name">G-50</field>
+        <field name="res_model">declaration.g50</field>
+        <field name="view_id" ref="view_declaration_g50_tree"/>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_declaration_g50" name="G 50" parent="account.menu_finance_reports" action="action_declaration_g50"/>
+
+
+</odoo>

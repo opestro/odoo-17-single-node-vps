@@ -1,0 +1,49 @@
+version: '3'
+services:
+  db:
+    image: bitnami/postgresql:16
+    user: root
+    environment:
+      - POSTGRESQL_USER=5442
+      - POSTGRESQL_USER=odoo
+      - POSTGRESQL_PASSWORD=odoo17@2023
+      - POSTGRESQL_DATABASE=postgres
+    restart: always # run as a service
+    volumes:
+      - ./postgresql:/var/lib/postgresql/data
+    networks:
+      - odoo-dnd-17-v1
+
+  odoo:
+    #image: odoo:17
+    build:
+      context: .
+      dockerfile: Dockerfile
+    user: root
+    depends_on:
+      - db
+    ports:
+      - "1019:8069"
+      - "2019:8072" # live chat
+    tty: true
+    command: --
+    #entrypoint: /entrypoint.sh
+    environment:
+      - PORT=5442
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo17@2023
+      #volumes:
+      #- odoo-web-data:/var/lib/odoo
+      #- /etc/timezone:/etc/timezone:ro
+      #- /etc/localtime:/etc/localtime:ro
+      #- ./entrypoint.sh:/entrypoint.sh   # if you want to install additional Python packages, uncomment this line!
+      #- ./addons:/mnt/extra-addons
+      #- ./etc:/etc/odoo
+    restart: always # run as a service
+    networks:
+      - odoo-dnd-17-v1
+    #labels:
+networks:
+  odoo-dnd-17-v1:
+    driver: bridge

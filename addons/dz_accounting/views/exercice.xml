@@ -1,0 +1,78 @@
+<odoo>
+
+    <record id="view_account_exercice_form" model="ir.ui.view">
+        <field name="name">account.exercice.form</field>
+        <field name="model">account.exercice</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" />
+                    <button name="action_validate" string="Valider/Clôturer" type="object" class="btn-primary" invisible="state == 'closed'" />
+                    <button name="action_set_draft" string="remettre en Brouillon" type="object"  invisible="state == 'draft'"  />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="year"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="previous_exercice_id" />
+                            <field name="resultat_impot" />
+                            <field name="is_first" />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="g50_ids">
+                            <tree decoration-info="state == 'draft'"
+                                  decoration-muted="state == 'cancel'">
+                                <field name="month"/>
+                                <field name="year"/>
+                                <field name="declaration_date"/>
+                                <field name="tap" sum="Total"/>
+                                <field name="timbre" sum="Total"/>
+                                <field name="ibs" sum="Total"/>
+                                <field name="irg" sum="Total"/>
+                                <field name="tva_sale" sum="Total"/>
+                                <field name="tva_purchase" sum="Total"/>
+                                <field name="tva" sum="Total"/>
+                                <field readonly="1" name="amount_total" sum="Total"/>
+                                <field name="state"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="view_account_exercice_tree" model="ir.ui.view">
+        <field name="name">account.exercice.tree.</field>
+        <field name="model">account.exercice</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="year"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="state"/>
+                <field name="previous_exercice_id"/>
+                <field name="resultat_impot" />
+            </tree>
+        </field>
+    </record>
+    <record id="action_account_exercice" model="ir.actions.act_window">
+        <field name="name">Exercice comptable</field>
+        <field name="res_model">account.exercice</field>
+        <field name="view_id" ref="view_account_exercice_tree"/>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_account_exercice" name="Exercice Comptable" parent="account.menu_finance_reports" action="action_account_exercice"/>
+
+
+</odoo>

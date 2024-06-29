@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!--  -->
+
+        <record id="form_view_report_compte_res_form" model="ir.ui.view">
+            <field name="name">report.compte.res</field>
+            <field name="model">report.compte.res</field>
+            <field name="arch" type="xml">
+                <form string="Compte de résultat">
+                    <sheet>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <notebook>
+                            <page string="SOLDE">
+                                <field name="code" nolabel="0">
+                                    <tree editable="top" string="">
+                                        <field name="account" widget="many2many_tags"/>
+                                        <field name="sauf" widget="many2many_tags"/>
+                                    </tree>
+                                </field>
+                                <field name="domain" readonly="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- SECOND -->
+
+        <record id="form_view_report_compte_res_two_form" model="ir.ui.view">
+            <field name="name">report.compte.res_two</field>
+            <field name="model">report.compte.res_two</field>
+            <field name="arch" type="xml">
+                <form string="Compte de résultat">
+                    <sheet>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <notebook>
+                            <page string="SOLDE">
+                                <field name="code" nolabel="0">
+                                    <tree editable="top" string="">
+                                        <field name="account" widget="many2many_tags"/>
+                                        <field name="sauf" widget="many2many_tags"/>
+                                    </tree>
+                                </field>
+                                <field name="domain" readonly="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_report_compte_res_two_tree" model="ir.ui.view">
+            <field name="name">report.compte.res.tree</field>
+            <field name="model">report.compte.res</field>
+            <field name="arch" type="xml">
+                <tree string="Liasse Fiscal Compte de resultat 2">
+                    <field name="name"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</odoo>

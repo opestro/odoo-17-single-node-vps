@@ -1,0 +1,45 @@
+<odoo>
+
+    <record id="update_g50_payment_wizard" model="ir.ui.view">
+        <field name="name">plan wizard</field>
+        <field name="model">g50.payment.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="tap"/>
+                            <field name="timbre"/>
+                            <field name="ibs"/>
+                            <field name="irg"/>
+                            <field name="tva"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_pay" string="Confirm" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="update_g50_payment_wizard_action" model="ir.actions.act_window">
+        <field name="name">Paiement G50</field>
+        <field name="res_model">g50.payment.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="dz_accounting.update_g50_payment_wizard"/>
+    </record>
+
+     <act_window id="update_g50_payment_wizard_action"
+                name="Réglement du G50"
+                binding_model="declaration.g50"
+                res_model="g50.payment.wizard"
+                binding_views="list"
+                view_mode="form"
+                target="new"
+                view_id="dz_accounting.update_g50_payment_wizard"
+    />
+
+</odoo>

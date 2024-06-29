@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tft_financier_report_config" model="account.liasse.report_config">
+            <field name="name">TFT Financier</field>
+            <field name="type" eval="'tft'"/>
+        </record>
+
+        <record id="account_report_tcr_financier_liasse_1" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.tft_financier_report_config')" />
+            <field name="name">Encaissement reçus des clients</field>
+            <field name="domain">['|',('code', '=like', '70%'),('code', '=like', '41%')]</field>
+            <field name="domain_credit">['|',('code', '=like', '467%'),'|',('code', '=like', '468%'),('code', '=like', '48%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_2" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.tft_financier_report_config')" />
+            <field name="name">Sommes versées aux fournisseurs et au personnel</field>
+            <field name="domain">['|',('code', '=like', '3%'),'|',('code', '=like', '40%'),'|',('code', '=like',
+                '42%'),'|',('code', '=like', '43%'),'|',('code', '=like', '44%'),'|',('code', '=like',
+                '60%'),'|',('code', '=like', '61%'),'|',('code', '=like', '62%'),'|',('code', '=like', '63%'),
+                ('code','=like', '64%'),'!',('code', '=like', '-404%'),'!',('code', '=like', '-405%'),'!',('code', '=like','-444%')
+                ,'!',('code', '=like', '-627%')]
+            </field>
+            <field name="domain_debit">['|',('code', '=like', '467%'),'|',('code', '=like', '468%'),('code', '=like', '48%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_3" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.tft_financier_report_config')" />
+            <field name="name">Intérêts et autres frais financiers payés</field>
+            <field name="domain">['|',('code', '=like', '66%'),('code', '=like', '627%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_4" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.tft_financier_report_config')" />
+            <field name="name">Impôts sur les résultats payés</field>
+            <field name="domain">['|',('code', '=like', '69%'),'|',('code', '=like', '444%'),'|',('code', '=like', '133%'),('code', '=like', '134%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_5" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.tft_financier_report_config')" />
+            <field name="name">Flux de trésorerie lié à des éléments extraordinaires</field>
+            <field name="domain">['|',('code', '=like', '65%'),'|',('code', '=like', '67%'),'|',('code', '=like', '68%'),'|',('code', '=like', '75%'),'|',('code', '=like', '77%'),('code', '=like', '78%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_6" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.tft_financier_report_config')" />
+            <field name="name">Décaissements sur acquisition d'immobilisations corporelles ou incorporelles</field>
+            <field name="domain">['|',('code', '=like', '404%'),('code', '=like', '405%')]</field>
+            <field name="domain_debit">['|',('code', '=like', '20%'),'|',('code', '=like', '21%'),'|',('code', '=like', '22%'),'|',('code', '=like', '23%'),'|',('code', '=like', '24%'),('code', '=like', '25%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_7" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.tft_financier_report_config')" />
+            <field name="name">Encaissements sur cessions d'immobilisations corporelles ou incorporelles</field>
+            <field name="domain">[('code', '=like', '28%')]</field>
+            <field name="domain_credit">['|',('code', '=like', '20%'),'|',('code', '=like', '21%'),'|',('code', '=like', '22%'),'|',('code', '=like', '23%'),'|',('code', '=like', '24%'),'|',('code', '=like', '25%'),('code', '=like', '462%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_8" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.tft_financier_report_config')" />
+            <field name="name">Décaissements sur acquisition d'immobilisations financières</field>
+            <field name="domain_debit">['|',('code', '=like', '26%'),'|',('code', '=like', '27%'),('code', '=like', '464%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_9" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.tft_financier_report_config')" />
+            <field name="name">Encaissements sur cessions d'immobilisations financières</field>
+            <field name="domain_credit">['|',('code', '=like', '26%'),'|',('code', '=like', '27%'),('code', '=like', '465%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_10" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.tft_financier_report_config')" />
+            <field name="name">Intérêts encaissés sur placements financiers</field>
+            <field name="domain">['|',('code', '=like', '761%'),'|',('code', '=like', '762%'),'|',('code', '=like', '763%'),'|',('code', '=like', '765%'),'|',('code', '=like', '766%'),('code', '=like', '768%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_11" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.tft_financier_report_config')" />
+            <field name="name">Dividendes et quote-part de résultats reçus</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_12" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.tft_financier_report_config')" />
+            <field name="name">Encaissements suite à l'émission d'actions</field>
+            <field name="domain_credit">[('code', '=like', '17%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_13" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.tft_financier_report_config')" />
+            <field name="name">Dividendes et autres distributions effectués</field>
+            <field name="domain">[('code', '=like', '457%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_14" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.tft_financier_report_config')" />
+            <field name="name">Encaissements provenant d'emprunts</field>
+            <field name="domain_credit">['|',('code', '=like', '10%'),'|',('code', '=like', '16%'),'|',('code', '=like', '18%'),('code', '=like', '45%'),'!',('code', '=like', '457%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_15" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.tft_financier_report_config')" />
+            <field name="name">Remboursements d'emprunts ou d'autres dettes assimilés</field>
+            <field name="domain_debit">['|',('code', '=like', '10%'),'|',('code', '=like', '16%'),'|',('code', '=like', '18%'),('code', '=like', '45%'),'!',('code', '=like', '457%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_16" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.tft_financier_report_config')" />
+            <field name="name">Subvention</field>
+            <field name="domain">['|',('code', '=like', '74%'),'|',('code', '=like', '131%'),('code', '=like', '132%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_17" model="report.bilan.passif">
+            <field name="liasse_id" eval="ref('dz_accounting.tft_financier_report_config')" />
+            <field name="name">Trésorerie et équivalents de trésorerie à l'ouverture/clôture de l'exercice</field>
+            <field name="domain">['|',('code', '=like', '51%'),'|',('code', '=like', '52%'),'|',('code', '=like', '53%'),'|',('code', '=like', '54%'),('code', '=like', '58%')]</field>
+        </record>
+
+
+    </data>
+</odoo>

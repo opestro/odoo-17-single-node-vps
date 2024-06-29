@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>	
+    <data>
+	<!--Timbre: Form-->
+	<record id="config_timbre_form" model="ir.ui.view" >
+          <field name="name">config.timbre.form</field>
+          <field name="model">config.timbre</field>
+          <field name="arch" type="xml">
+          <form string="Configuration Timbre">
+            <sheet>
+                <div class="oe_title">
+                    <h1>
+                        <field name="name" readonly="1"/>
+                    </h1>
+                </div>
+
+            <group>
+                <group string="Valeur/Tranche">	
+                   <field name="valeur"/>
+                   <field name="tranche"/>
+                </group>
+                <group string="Valeur Min/Max">	
+                   <field name="min_value"/>
+                   <field name="max_value"/>
+                </group>
+            </group>
+            <group >
+                <group string="Compte de contrepartie">
+                   <field name="account_id"/>
+                   <field name="account_id_purchase"/>
+                </group>
+            </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+
+	<!--Timbre: Tree-->
+	<record id="config_timbre_tree" model="ir.ui.view" >
+          <field name="name">config.timbre.tree</field>
+          <field name="model">config.timbre</field>
+          <field name="arch" type="xml">
+            <tree string="Configuration Timbre">
+                <field name="name"/>
+	            <field name="valeur"/>
+                <field name="tranche"/>
+                <field name="min_value"/>
+                <field name="max_value"/>
+                <field name="account_id"/>
+            </tree>
+         </field>
+        </record>
+
+	<record id="action_timbre" model="ir.actions.act_window">
+            <field name="name">Configuration Timbre</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">config.timbre</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a calcul of timbre.
+              </p><p>
+              </p>
+            </field>
+        </record>
+
+    <menuitem action="action_timbre" id="menu_timbre" parent="account.menu_finance_configuration"
+              groups="base.group_no_one" sequence="90"/>
+
+    </data>
+</odoo>

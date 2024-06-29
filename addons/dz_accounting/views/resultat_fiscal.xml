@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!-- 1/ Tableau des mouvements des stocks : -->
+
+        <record id="form_view_report_fiscal_line_form" model="ir.ui.view">
+            <field name="name">res.fiscal.line.view</field>
+            <field name="model">res.fiscal.line</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                                <field name="exercice_id" />
+                        </group>
+                        <notebook>
+                            <page string="Réintegrations">
+                                <group>
+                                    <label for="r1" style="width:500px;"/>
+                                    <field name="r1" nolabel="1"/>
+                                    <field name="r2"/>
+                                    <field name="r3"/>
+                                    <field name="r4"/>
+                                    <field name="r5"/>
+                                    <field name="r6"/>
+                                    <field name="r7"/>
+                                    <field name="r8"/>
+                                    <field name="r9"/>
+                                    <field name="r10"/>
+                                    <field name="r11"/>
+                                    <field name="r12" invisible="1"/>
+                                    <field name="r13"/>
+                                    <field name="r14"/>
+                                    <field name="r15"/>
+                                    <field name="r16"/>
+                                    <field name="r17"/>
+                                </group>
+                            </page>
+                            <page string="Déduction">
+                                <group>
+                                    <label for="d1" style="width:500px;"/>
+                                    <field name="d1" nolabel="1"/>
+                                    <field name="d2"/>
+                                    <field name="d3"/>
+                                    <field name="d4"/>
+                                    <field name="d5"/>
+                                    <field name="d6"/>
+                                    <field name="d7"/>
+                                </group>
+                            </page>
+                            <page string="Déficits antérieurs à déduire">
+                                <group>
+                                    <group>
+                                        <field name="deficit1"/>
+                                        <field name="deficit2"/>
+                                        <field name="deficit3"/>
+                                        <field name="deficit4"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

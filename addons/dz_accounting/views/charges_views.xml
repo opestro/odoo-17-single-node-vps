@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!-- 3/ Charges de personnel, impôts, taxes et versements assimilés, autres services -->
+
+        <record id="form_view_report_charges_form" model="ir.ui.view">
+            <field name="name">report.charges.view</field>
+            <field name="model">report.charges</field>
+            <field name="arch" type="xml">
+                <form string="3/ Charges de personnel, impôts, taxes et versements assimilés, autres services">
+                    <sheet>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <notebook>
+                            <page string="SOLDE">
+                                <field name="code" nolabel="0">
+                                    <tree editable="top" string="">
+                                        <field name="account" widget="many2many_tags"/>
+                                        <field name="sauf" widget="many2many_tags"/>
+                                    </tree>
+                                </field>
+                                <field name="domain" readonly="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- 4/ Autres charges et produits opérationnels -->
+
+        <record id="form_view_report_charges_others_form" model="ir.ui.view">
+            <field name="name">report.charges.others</field>
+            <field name="model">report.charges.others</field>
+            <field name="arch" type="xml">
+                <form string="4/ Autres charges et produits opérationnels">
+                    <sheet>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <notebook>
+                            <page string="SOLDE">
+                                <field name="code" nolabel="0">
+                                    <tree editable="top" string="">
+                                        <field name="account" widget="many2many_tags"/>
+                                        <field name="sauf" widget="many2many_tags"/>
+                                    </tree>
+                                </field>
+                                <field name="domain" readonly="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

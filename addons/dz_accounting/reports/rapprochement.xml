@@ -1,0 +1,82 @@
+<odoo>
+    <data>
+        <template id="rapprochement_bancaire" >
+            <t t-foreach="docs" t-as="doc">
+        <t t-call="web.basic_layout">
+            <style type="text/css">
+                    .validation_table th,.validation_table td {border: 1px solid black;padding : 4px;color: black;}
+                    .validation_table th {font-weight: bold !important;}
+                    .validation_table{margin-bottom:5px;width:100%;}
+                    .container {font-family: "Times New Roman", Times, serif;font-size: 15px;}
+            </style>
+            <div class="page">
+
+                <div  style="padding:30px 60px;" class="text-center" >
+                    <strong style="background-color: #c4c4d4;text-decoration:underline;padding:18px 55px;border: 2px solid black;"  >
+                        RAPPROCHEMENT BANCAIRE AU <span t-esc="doc.date.strftime('%d-%m-%Y')" />
+                    </strong>
+                </div>
+                    <table class="validation_table">
+                        <tr>
+                            <th class="text-center" colspan="4">
+                                <span>Compte 512 - <t t-esc="doc.journal_id.name" /></span>
+                            </th>
+                            <th class="text-center" colspan="4">
+                                <span>Relevé bancaire - <t t-esc="doc.journal_id.name" /></span>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Date</th>
+                            <th>Libellé</th>
+                            <th>DEBIT</th>
+                            <th>CREDIT</th>
+                            <th>Date</th>
+                            <th>Libellé</th>
+                            <th>DEBIT</th>
+                            <th>CREDIT</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Solde au <span t-esc="doc.date.strftime('%d-%m-%Y')" /></td>
+                            <td><span t-esc="doc.balance_start" /></td>
+                            <td></td>
+                            <td colspan="2">Solde au <span t-esc="doc.date.strftime('%d-%m-%Y')" /></td>
+                            <td></td>
+                            <td><span t-esc="doc.bank_balance_start" /></td>
+                        </tr>
+                        <t t-set="i" t-value="0" />
+                        <tr t-foreach="range(max(len(doc.bank_lines),len(doc.account_move_lines)))" t-as="item" >
+                            <td><span t-if="len(doc.bank_lines) > i" t-esc="doc.bank_lines[i].date.strftime('%d-%m-%Y')" /></td>
+                            <td><span t-if="len(doc.bank_lines) > i" t-esc="doc.bank_lines[i].name" /></td>
+                            <td><span t-if="len(doc.bank_lines) > i" t-esc="doc.bank_lines[i].debit" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                            <td><span t-if="len(doc.bank_lines) > i" t-esc="doc.bank_lines[i].credit" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                            <td><span t-if="len(doc.account_move_lines) > i" t-esc="doc.account_move_lines[i].date.strftime('%d-%m-%Y')" /></td>
+                            <td><span t-if="len(doc.account_move_lines) > i" t-esc="doc.account_move_lines[i].name" /></td>
+                            <td><span t-if="len(doc.account_move_lines) > i" t-esc="doc.account_move_lines[i].debit" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                            <td><span t-if="len(doc.account_move_lines) > i" t-esc="doc.account_move_lines[i].credit" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                            <t t-set="i" t-value="i+1" />
+                        </tr>
+                        <tr>
+                            <td colspan="2">Solde débiteur</td>
+                            <td colspan="2" ><strong t-esc="doc.balance_end" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                            <td colspan="2">Solde créditeur</td>
+                            <td colspan="2" ><strong t-esc="doc.bank_balance_end" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        </tr>
+                    </table>
+            </div>
+        </t>
+            </t>
+    </template>
+
+    <record id="rapprochement_bancaire_action" model="ir.actions.report">
+        <field name="name">Etat de rapprochement bancaire</field>
+        <field name="model">bank.releve</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">dz_accounting.rapprochement_bancaire</field>
+        <field name="report_file">dz_accounting.rapprochement_bancaire</field>
+        <field name="print_report_name">'Etat de rapprochement bancaire'</field>
+        <field name="paperformat_id" ref="paperformat_liasse"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    </data>
+</odoo>

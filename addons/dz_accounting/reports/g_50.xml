@@ -1,0 +1,873 @@
+<odoo>
+    <data>
+        <template id="declaration_g_50_report" >
+            <t t-call="web.basic_layout">
+           <style type="text/css">
+                @font-face{
+    font-family: 'Arial';
+    src: url('/dz_accounting/static/fonts/arial.ttf') format('truetype');
+}
+                .validation_table th,.validation_table td{vertical-align: middle;border: 1px solid black;padding : 1px;padding-left:5px;color: black;border-top: 0px ;border-bottom: 0px ;}
+                .full-border{border-top: 1px solid black;border-bottom: 1px solid black;}
+               .validation_table th{font-weight: bold !important;border: 2px solid black !important;}
+                .validation_table{margin-bottom:5px;font-size: 14px;}
+                .container {font-family: Arial;font-size: 14px;}
+                .page {font-family: Arial;font-size: 14px;}
+                .inline{display: inline-block;vertical-align: top;}
+                .bordure{border:1px solid black;}
+               .validation_table{width:100%;border: 2px solid black !important;}
+               .norap{white-space:nowrap;width:1%;}
+               strong{font-weight: bolder !important;}
+           .dotted{border-bottom:1px black dotted !important;}
+           .bordered{border-bottom:1px black solid !important;}
+           </style>
+            <div class="page">
+                <div style="margin-right:0px;width:30%;max-width:30%;" class="inline">
+                    <div style="font-size:11px;max-width:51%;" class="inline">
+                        <div style="line-height:1.5;" class="text-center inline">
+                            <span>المديرية العامة للضرائب</span><br/>
+                            <span style="letter-spacing: 1px;" >DIRECTION GENERALE DES IMPOTS</span>
+                            <hr style="background-color:black;line-height:1.0;text-align:center;margin:auto;" size="1" width="34%" />
+                            <span>مديرية</span><br/>
+                            <span style="letter-spacing: 1px;" >DIRECTION <strong t-esc="wilaya" /></span>
+                            <hr style="background-color:black;line-height:1.0;text-align:center;margin:auto;" size="1" width="34%" />
+                            <span>مفتشية الضرائب ل</span><br/>
+                            <span style="letter-spacing: 1px;">INSPECTION DES IMPOTS <strong t-esc="inspection" /></span>
+                            <hr style="background-color:black;line-height:1.0;text-align:center;margin:auto;" size="1" width="34%" />
+                            <span>قباضة الضرائب ل</span><br/>
+                            <span style="letter-spacing: 1px;">RECETTE DES IMPOTS <strong t-esc="recette" /></span><br/>
+                            <hr style="background-color:black;line-height:1.0;text-align:center;margin:auto;" size="1" width="34%" />
+                            <span><span style="letter-spacing: 1px;">COMMUNE DE <strong t-esc="commune" /> </span>بلدية</span>
+                            <hr style="background-color:black;line-height:1.0;text-align:center;margin:auto;" size="1" width="34%" />
+                        </div>
+                    </div>
+                    <div class="inline">
+                        <div style="line-height: 1.0;padding:10px;margin-bottom:20px;" class="text-center bordure">
+                            <span>الشهر  <strong t-esc="mois" /> <strong t-esc="year" /></span><br/>
+                            <span></span><br/>
+                            <span>Mois de  <strong t-esc="mois" /> <strong t-esc="year" /></span><br/>
+                            <span>Trimestre  </span><br/>
+                        </div>
+                        <div style="line-height: 1.0;padding:10px;" class="text-center bordure">
+                            <span>للتذكير إجباريا</span><br/>
+                            <span>A RAPPELER</span><br/>
+                            <span>OBLIGATOIREMENT</span><br/>
+                        </div>
+                    </div>
+                    <div style="margin-top:10px;">
+                        <div class="inline">NIS:</div>
+                            <table class="inline" style="border-bottom:1px solid black;">
+                                <tr>
+                                    <t t-foreach="list(nis)" t-as="n">
+                                        <td style="padding: 1px 6px; border-left:1px solid black;border-right:1px solid black;">
+                                            <strong t-esc="n"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </table>
+                        <div style="margin-top:13px;">
+                            <div class="inline" >NIF:</div>
+                            <table class="inline" style="border-bottom:1px solid black;">
+                                <tr>
+                                    <t t-foreach="list(nif)" t-as="n" >
+                                        <td style="padding: 1px 6px; border-left:1px solid black;border-right:1px solid black;">
+                                            <strong t-esc="n" />
+                                        </td>
+                                    </t>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="margin-top:13px;">
+                            <div class="inline" >Article d'imposition:</div>
+                            <table class="inline" style="border-bottom:1px solid black;">
+                                <tr>
+                                    <t t-foreach="list(ai)" t-as="n" >
+                                        <td style="padding: 1px 6px; border-left:1px solid black;border-right:1px solid black;">
+                                            <strong t-esc="n" />
+                                        </td>
+                                    </t>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-right:30px;width:49%;max-width:49%;" class="inline">
+                    <div style="line-height: 1.2;margin-bottom:20px;font-size:18px;padding:9px;" class="text-center bordure">
+                        <strong>الضرائب و الرسوم المحصلة فورا أو عن طريق الإقتطاع من المصدر</strong><br/>
+                        <strong> تصريح يقوم مقام حافظة إشعار بالتسديد</strong><br/>
+                        <strong>IMPOTS ET TAXES PERÇUS AU COMPTANT OU PAR VOIE DE</strong><br/>
+                        <strong>RETENUE A LA SOURCE</strong><br/>
+                        <span>DECLARATION TENANT LIEU DE BORDEREAU – AVIS DE VERSEMENT</span>
+                    </div>
+                    <div style="padding:20px 4px;"  class="text-center bordure">
+                        <table style="width:100%">
+                            <tr>
+                                <td class="norap text-end" >M</td>
+                                <td class="text-center dotted" ><strong t-esc="company" /></td>
+                                <td class="norap text-start">(السيد(ة </td>
+                            </tr>
+                        </table>
+                        <table style="width:100%">
+                             <tr>
+                                <td class="text-end" ></td>
+                                <td class="text-center"><span>(nom et prénom – raison sociale) (الإسم – االقب – إسم الشركة)</span></td>
+                                <td class="text-start"></td>
+                            </tr>
+                        </table>
+                        <table style="width:100%">
+                            <tr>
+                                <td class="text-end norap">Activité / Profession :</td>
+                                <td class="text-center dotted"><strong t-esc="activity"/></td>
+                                <td class="text-start norap">المهنة أو النشاط:</td>
+                            </tr>
+                        </table>
+                        <table style="width:100%">
+                            <tr>
+                                <td class="text-end norap">Adresse:</td>
+                                <td class="text-center dotted"><strong t-esc="address"/></td>
+                                <td class="text-start norap">العنوان:</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div style="width:15%;" class="text-center inline">
+                    <strong>IMPORTANT !</strong><br/>
+                    <div style="padding:3px;" class="bordure">
+                        <div class="text-end" >
+                            <span>هذا التصريح يجب أن يقدم إلى قباضة</span><br/>
+                            <span>الضرائب خلال العشرين يوم الأولى من</span><br/>
+                            <span>الشهر.</span>
+                        </div>
+                        <hr style="background-color:black;line-height:1.0;text-align:center;margin:auto;" size="1" width="34%" />
+                        <div class="text-start" style="text-align:justify;" >
+                            <span>La présente déclaration doit</span><br/>
+                            <span>être déposée à la recette des</span><br/>
+                            <span>impôts dans les</span>
+                            <strong style="text-decoration:underline;">VINGT</strong><br/>
+                            <strong style="text-decoration:underline;">PREMIERS JOURS DU MOIS.</strong>
+                        </div>
+                    </div>
+                    <br/>
+                    <div>
+                        <span>رمز النشاط</span><br/>
+                        <span>CODE ACTIVITE</span><br/>
+                        <div style="margin-top:10px;" >
+                            <table style="margin:auto;border-bottom:1px solid black;">
+                                <tr>
+                                    <t t-foreach="list(code_activite)" t-as="n">
+                                        <td style="padding: 1px 6px; border-left:1px solid black;border-right:1px solid black;">
+                                            <t t-esc="n"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top:15px;" >
+                    <table  class="validation_table">
+                        <tr class="full-border"><th class="text-center" colspan="7" >Taxe sur l'activité professionnelle au taux de 2% الـــرســـــم عـــلـــى الــــنـــــشـــــاط الــــمـــــهـــــنــــي بــــمــــعــــدل</th></tr>
+                        <tr class="full-border">
+                            <td class="text-center"  colspan="2">Code</td>
+                            <td class="text-center"  colspan="2">Opérations imposables  العمليات الخاضعة للضريبة</td>
+                            <td class="text-center" >Chiffre d'affaires رقم الأعمال</td>
+                            <td class="text-center" ><span>Chiffre d'affaires imposable</span><br/><span>Recettes professionnelles imposables</span></td>
+                            <td class="text-center" >Montant à payer (en DA)</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">C 1 A 11</td>
+                            <td colspan="2">Affaires bénéficiant d'une réfaction de 50% ……</td>
+                            <td class="bordered text-end" ></td>
+                            <td class="bordered text-end" ></td>
+                            <td class="bordered text-end" ></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">C 1 A 12</td>
+                            <td colspan="2">Affaires bénéficiant d'une réfaction de 30% ……</td>
+                            <td class="bordered text-end" ><t t-esc="refaction_30" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"  /></td>
+                            <td class="bordered text-end" ><t t-esc="round(refaction_30 * 0.7,2)" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"  /></td>
+                            <td class="bordered text-end" ><t t-esc="round(refaction_30 * 0.7 * 0.02,2)" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"  /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">C 1 A 13</td>
+                            <td colspan="2">Affaires sans réfaction ………………....................................</td>
+                            <td class="bordered text-end" ><t t-esc="no_refaction" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"  /></td>
+                            <td class="bordered text-end" ><t t-esc="no_refaction" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"  /></td>
+                            <td class="bordered text-end" ><t t-esc="round(no_refaction * 0.02)" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"  /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">C 1 A 14</td>
+                            <td colspan="2">Affaires exonérées …………………………...........................</td>
+                            <td class="bordered" ></td>
+                            <td class="bordered" ></td>
+                            <td class="bordered" ></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">C 1 A 20</td>
+                            <td colspan="2">Recettes professionnelles (Professions libérales) ...............</td>
+                            <td class="bordered" ></td>
+                            <td class="bordered" ></td>
+                            <td class="bordered" ></td>
+                        </tr>
+                        <tr class="full-border" >
+                            <th>1</th>
+                            <th colspan="2">Préciser autres taux de réfaction le cas échéant</th>
+                            <th width="6%" class="text-end">TOTAL</th>
+                            <th class="text-end" ><t t-esc="refaction_30 + no_refaction" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"  /></th>
+                            <th class="text-end" ><t t-esc="refaction_30 + no_refaction" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"  /></th>
+                            <th class="text-end" ><t t-esc="tap" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"  /></th>
+                        </tr>
+                    </table>
+                    <table class="validation_table">
+                        <tr class="full-border" ><th colspan="4" class="text-center" >Acomptes IBS الــتــســبــيــقـــات عـلـى الــحــســاب لـلـضـريــبــة عـلـى أربــاح الــشــركــات</th></tr>
+                        <tr class="full-border">
+                            <td class="text-center" >Code</td>
+                            <td class="text-center" >Acomptes IBS</td>
+                            <td class="text-center" >Détermination des acomptes provisionnels</td>
+                            <td class="text-center" >Montant à payer (en DA)</td>
+                        </tr>
+                        <tr class="full-border">
+                            <td>E 1 M 10</td>
+                            <td>Acompte provisionnel</td>
+                            <td class="bordered text-end" ></td>
+                            <td class="bordered text-end" ></td>
+                        </tr>
+                        <tr class="full-border">
+                           <th>2</th>
+                           <th colspan="2" class="text-end" >TOTAL</th>
+                           <th></th>
+                        </tr>
+                    </table>
+                    <br/>
+                    <table class="validation_table">
+                        <colgroup>
+                            <col span="1" style="width:4%;" />
+                            <col span="1" style="width:3%;" />
+                            <col span="1" style="width:40%;" />
+                            <col span="1" style="width:7%;" />
+                            <col span="1" style="width:18%;" />
+                            <col span="1" style="width:7%;" />
+                            <col span="1" style="width:20%;" />
+                        </colgroup>
+                        <tr class="full-border">
+                            <th class="text-center" colspan="7">IRG salaires et autres retenues à la source IRG / IBS .الــضــريـبــة عــلــى الـدخـل الإجـمــالـي عـلـى الأجــوروالإقـتــطــاعــات الأخــرى مــن الــمـصـدرلـ ض.د.إ. / ض.أ.ش </th>
+                        </tr>
+                        <tr class="full-border">
+                            <td class="text-center"  colspan="2">Code</td>
+                            <td class="text-center"  colspan="2">Catégories de revenus soumis à une retenue à la source IRG ou IBS</td>
+                            <td class="text-center" >Revenus nets imposables</td>
+                            <td class="text-center" >Taux</td>
+                            <td class="text-center" >Montant à payer (en DA)</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">E 1 L 20</td>
+                            <td colspan="2">IRG/ Traitements salaires, pensions et rentes viagères ........................................................................</td>
+                            <td class="bordered" ></td>
+                            <td>Barème</td>
+                            <td class="bordered" ></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">E 1 L 30</td>
+                            <td colspan="2">IRG/ Revenus des créances, dépôts et cautionnements ......................................................................</td>
+                            <td class="bordered" ></td>
+                            <td>10%</td>
+                            <td class="bordered" ></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">E 1 L 40</td>
+                            <td colspan="2">IRG/ Bénéfices distribués par les sociétés de capitaux, libératoire </td>
+                            <td class="bordered" ></td>
+                            <td>15%</td>
+                            <td class="bordered" ></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">E 1 L 60</td>
+                            <td colspan="2">IRG/ Revenus des bons de caisse anonymes</td>
+                            <td class="bordered" ></td>
+                            <td>50%</td>
+                            <td class="bordered" ></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">E 1 L 80</td>
+                            <td colspan="2">IRG/ Autres retenues à la source </td>
+                            <td class="bordered" ></td>
+                            <td>%</td>
+                            <td class="bordered" ></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">E 1 M 30</td>
+                            <td colspan="2">IBS/ Revenus des entreprises étrangères non installées en Algérie (prestations de services) (1).......</td>
+                            <td class="bordered" ></td>
+                            <td>24%</td>
+                            <td class="bordered" ></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">E 1 M 40</td>
+                            <td colspan="2">IBS/ Autres retenues à la source </td>
+                            <td class="bordered" ></td>
+                            <td>%</td>
+                            <td class="bordered" ></td>
+                        </tr>
+                        <tr class="full-border" >
+                            <th>3</th>
+                            <th colspan="2">(1) Joindre relevé détaillé des retenues à la source par entreprise.</th>
+                            <th class="text-end" >TOTAL</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </t>
+            <t t-call="web.basic_layout">
+            <style type="text/css">
+                    .validation_table th,.validation_table td {vertical-align: middle;border: 1px solid black;padding : 4px;color: black;padding-left:5px;border-top: 0px ;border-bottom: 0px ;}
+                    .validation_table th{font-weight: bold !important;border: 2px solid black !important;}
+                    .validation_table{margin-bottom:5px;}
+                    .container {font-family: Arial,sans-serif;;font-size: 14px;}
+                    .inline{display: inline-block;vertical-align: top;}
+                    .bordure {border:1px solid black;}
+                    .validation_table{width:100%;border: 2px solid black !important;}
+                .full-border{border-top: 1px solid black;border-bottom: 1px solid black;}
+
+            .dotted{border-bottom:1px black dotted !important;}
+            .bordered{border-bottom:1px black solid !important;}
+            </style>
+            <div class="page">
+                <br/>
+                <table class="validation_table">
+                    <tr class="full-border" >
+                        <th class="text-center" colspan="6">Droit de timbre sur état حــــق الـــطـــابـــع</th>
+                    </tr>
+                    <tr class="full-border">
+                        <td class="text-center"  colspan="2" >Code</td>
+                        <td class="text-center" >Opérations imposables   العمليات الخاضعة لــلـضـريـبـة </td>
+                        <td class="text-center" >Chiffre d'affaires imposable</td>
+                        <td class="text-center" >Taux</td>
+                        <td class="text-center" >Montant à payer (en DA)</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" >E 2 E 00</td>
+                        <td class="bordered" ></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered">%</td>
+                        <td class="bordered text-end" ><t t-esc="timbre" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" ></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered">%</td>
+                        <td class="bordered" ></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" ></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered">%</td>
+                        <td class="bordered" ></td>
+                    </tr>
+                    <tr class="full-border">
+                        <th>4</th>
+                        <th class="text-end" colspan="2">TOTAL</th>
+                        <th></th>
+                        <th></th>
+                        <th class="text-end"><t t-esc="timbre" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"/></th>
+                    </tr>
+                </table>
+                <br/>
+                <table class="validation_table">
+                    <tr class="full-border">
+                       <th class="text-center"  colspan="6">Impôts et taxes non repris ci-dessus  الــــضــــرائـــب و الــرســوم الــــغــــيــــر واردة أعــــــلاه</th>
+                    </tr>
+                    <tr class="full-border">
+                        <td class="text-center"  colspan="2" >Code </td>
+                        <td class="text-center" >Opérations imposables  العمليات الخاضعة للضريبة  </td>
+                        <td class="text-center" >Chiffre d'affaires imposable</td>
+                        <td class="text-center" >Taux</td>
+                        <td class="text-center" >Montant à payer (en DA)</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" ></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered">%</td>
+                        <td class="bordered" ></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" ></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered">%</td>
+                        <td class="bordered" ></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" ></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered">%</td>
+                        <td class="bordered" ></td>
+                    </tr>
+                    <tr class="full-border">
+                        <th>5</th>
+                        <th class="text-end" colspan="2">TOTAL</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </table>
+                <br/>
+                <table class="validation_table">
+                    <tr class="full-border">
+                        <td class="text-center"  colspan="2">RECAPITULATION (EN DA) (تــــلــــخــيــص ب (دج</td>
+                        <td class="text-center" ><span>Cadre réservé au contribuable</span><br/><span> إطار خاص بالمكلف بالضريبة</span></td>
+                        <td class="text-center" ><span>Cadre réservé à la recette des impôts</span><br/><span>إطار خاص بقباضة الضرائب</span></td>
+                        <td class="text-center" ><span>Cadre réservé au service d'assiette</span><br/><span>إطار خاص بمصلحة الوعاء</span></td>
+                    </tr>
+                    <tr>
+                        <td> 1 – TAP. <span>C/500 026/A ……………</span></td>
+                        <td class="text-end" width="10%" ><t t-esc="tap" t-options="{'widget': 'float',  'decimal_precision': 'Product Price'}"/></td>
+                        <td style="border-bottom:1px solid black;vertical-align: top;" rowspan="11">
+                            <span></span>
+                            <div style="width:98%;" class="text-end">يشهد بصحة و صدق محتوى هذا التصريح</div>
+                            <div style="width:98%;" class="text-end">و تطابقه مع الوثائق المحاسبية.</div>
+                            <span>Certifié sincère et véritable le</span><br/>
+                            <span>contenu de la présente déclaration</span><br/>
+                            <span>et conforme aux documents</span><br/>
+                            <span>comptables.</span><br/>
+                            <span>A ……………… le ………………</span><br/>
+                            <span>Cachet, signature, </span><br/>
+                        </td>
+                        <td style="border-bottom:1px solid black;vertical-align: top;" rowspan="11">
+                            <span><strong>Reçu</strong> - ce jour, la présente déclaration enregistré</span><br/>
+                            <span>sous le numéro : ……………………......................</span><br/>
+                            <span>payée - par chèque bancaire N° :……….………..</span><br/>
+                            <span>du : …………………………………………………..</span><br/>
+                            <span>tiré sur l'Agence : ……………………….................</span><br/>
+                            <span>- par chèque postal N°: …………………………….</span><br/>
+                            <span>- en numéraire: ………………………….................</span><br/>
+                            <span>prise en recette par quittance N° …………………</span><br/>
+                            <span>de ce jour.</span><br/>
+                            <span>A …………..…………… le ………………….……</span><br/>
+                            <span>Le receveur des impôts</span><br/>
+                            <span> Cachet,     signature,</span><br/>
+                        </td>
+                        <td style="border-bottom:1px solid black; vertical-align: top;" rowspan="11">
+                            <span>Déclaration enregistrée le: …………………</span><br/>
+                            <span>……………………………………………….</span><br/>
+                            <span></span><br/>
+                            <span>Observations éventuelles :</span><br/>
+                            <span>………………………………………………</span><br/>
+                            <span>………………………………………………</span><br/>
+                            <span>………………………………………………</span><br/>
+                            <span>………………………………………………</span><br/>
+                            <span>………………………………………………</span><br/>
+                            <span>………………………………………………</span><br/>
+                            <span>………………………………………………</span><br/>
+                            <span>………………………………………………</span><br/>
+                            <span>………………………………………………</span><br/>
+                            <span>………………………………………………</span><br/>
+                            <span>………………………………………………</span>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td>2 – AP / IBS. <span>C/201 001/M1…………</span></td>
+                        <td class="bordered" ></td>
+                    </tr>
+                     <tr>
+                        <td>3.1 – IRG salaires. <span>C/201 001/100 …………</span></td>
+                        <td class="bordered" ></td>
+                    </tr>
+
+                    <tr>
+                        <td>3.2 – IRG / Autres ret. sources. <span>C/201 001/101/A/B/C …</span></td>
+                        <td class="bordered" ></td>
+                    </tr>
+                    <tr>
+                        <td> 3.3 – IBS/ Ret. à la source. <span>C/201 001/M2 et 3 ……</span></td>
+                        <td class="bordered" ></td>
+                    </tr>
+                    <tr>
+                        <td>– TIC. <span>C/201 003/303/A/B ……</span></td>
+                        <td class="bordered" ></td>
+                    </tr>
+                    <tr>
+                        <td>4 – Droits de timbre. <span>C/201 002/201…………</span></td>
+                        <td class="bordered text-end" ><t t-esc="timbre" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"/></td>
+                    </tr>
+                    <tr>
+                        <td>5 – Autres. <span>C/………………………</span></td>
+                        <td class="bordered" ></td>
+                    </tr>
+                    <tr>
+                        <td>6 – TVA. <span>C/500 020/A ……………</span></td>
+                        <td class="bordered text-end" ><t t-esc="tva" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"/></td>
+                    </tr>
+                    <tr>
+                        <td><br/><br/></td>
+                        <td class="bordered" ></td>
+                    </tr>
+                    <tr class="full-border" style="border-top:0px;" >
+                        <th class="text-end" >MONTANT TOTAL A PAYER</th>
+                        <th style="border-top:1px solid black;" class="text-end"><t t-esc="amount_total" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"/></th>
+                    </tr>
+
+
+                </table>
+            </div>
+        </t>
+            <t t-call="web.basic_layout">
+             <style type="text/css">
+                    .validation_table th,.validation_table td {vertical-align: middle;border: 1px solid black;padding:4px;padding-left:5px;color: black;}
+                    .validation_table th{font-weight: bold !important;border: 2px solid black !important;}
+                    .validation_table{margin-bottom:5px;}
+                    .container {font-family: Arial,sans-serif;;font-size: 14px;}
+                    .inline{display: inline-block;vertical-align: top;}
+                    .bordure {border:1px solid black;}
+                    .validation_table{width:100%;border: 2px solid black !important;}
+                 #third-page-table th,#third-page-table td {border-top: 0px ;border-bottom: 0px ;padding : 0px;color: black;padding-left:5px;}
+                 #third-page-tab th,#third-page-tab td {border-top: 0px ;border-bottom: 0px ;padding : 0px;color: black;padding-left:5px;}
+
+            .dotted{border-bottom:1px black dotted !important;}
+            .bordered{border-bottom:1px black solid !important;}
+             </style>
+            <div class="page">
+                <div style="width:30%;" class="text-start inline">
+                    <span>Les chiffres d'affaires et les revenus sont inscrits</span><br/>
+                    <span>en dinars, le dernier chiffre étant ramené au zéro.</span><br/>
+                    <span>(Exemple : 325.626 DA = 325.620 → DA)</span><br/>
+                </div>
+                <div style="width:40%;" class="text-center inline">
+                    <div style="width:70%;" class="bordure"><strong>الرسم على القيمة المضافة</strong><br/>
+                        <strong>TAXE SUR LA VALEUR AJOUTEE</strong>
+                    </div>
+                    <div>
+                        <strong><span>A / Chiffres d'affaires imposables</span><span> أ – رقم الأعمال الخاضع للضريبة</span></strong>
+                    </div>
+                </div>
+                <div style="width:29%;" class="text-end inline">
+                    <span>تسجل أرقام الأعمال و المداخيل بالدينار و العدد الأخير يراجع</span><br/>
+                    <span>إلى الصفر.</span><br/>
+                    <span> ( مثال: 325.626 = 325.620 دج)</span><br/>
+                </div>
+                <br/>
+                <table id="third-page-table" class="validation_table">
+                    <tr style="border:1px solid black;" >
+                        <td class="text-center" ><span>الرمز</span><br/><span>Code</span></td>
+                        <td class="text-center" ><span>Opérations assujetties à la TVA العمليات الخاضعة الرسم على القيمة المضافة</span></td>
+                        <td class="text-center" ><span>مجموع رقم الأعمال</span><br/><span>Chiffre d'affaires total</span></td>
+                        <td class="text-center" ><span> رقم الأعمال المعفى</span><br/><span>Chiffre d'affaires exonéré</span></td>
+                        <td class="text-center" ><span> رقم الأعمال الخاضع للضريبة</span><br/><span>Chiffre d'affaires imposable</span></td>
+                        <td class="text-center" ><span>Taux</span></td>
+                        <td class="text-center" ><span>المبلغ المدفوع ب ( د.ج)</span><br/><span>Montant des droits (en DA)</span></td>
+                    </tr>
+                    <tr>
+                        <td>E 3 B 11</td>
+                        <td>Biens, produits et denrées visées par l'article 23 du C. TCA</td>
+                        <td class="bordered text-end" ><t t-if="E3B11" t-esc="E3B11[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered text-end" ><t t-if="E3B11" t-esc="E3B11[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td>9%</td>
+                        <td class="bordered text-end" ><t t-if="E3B11" t-esc="E3B11[1]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                    </tr>
+                    <tr>
+                        <td>E 3 B 12</td>
+                        <td>Prestations de services visées par l'article 23 du C. TCA </td>
+                        <td class="bordered text-end" ><t t-if="E3B12" t-esc="E3B12[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered text-end" ><t t-if="E3B12" t-esc="E3B12[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered text-center" >"</td>
+                        <td class="bordered text-end" ><t t-if="E3B12" t-esc="E3B12[1]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                    </tr>
+                    <tr>
+                        <td>E 3 B 13</td>
+                        <td>Opérations immobilières visées par l'article 23 du C. TCA </td>
+                        <td class="bordered text-end" ><t t-if="E3B13" t-esc="E3B13[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered text-end" ><t t-if="E3B13" t-esc="E3B13[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered text-center" >"</td>
+                        <td class="bordered text-end" ><t t-if="E3B13" t-esc="E3B13[1]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                    </tr>
+                    <tr>
+                        <td>E 3 B 14</td>
+                        <td>Actes médicaux </td>
+                        <td class="bordered text-end" ><t t-if="E3B14" t-esc="E3B14[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered text-end" ><t t-if="E3B14" t-esc="E3B14[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered text-center" >"</td>
+                        <td class="bordered text-end" ><t t-if="E3B14" t-esc="E3B14[1]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                    </tr>
+                    <tr>
+                        <td>E 3 B 15</td>
+                        <td>Commissionnaires et courtiers</td>
+                        <td class="bordered text-end" ><t t-if="E3B15" t-esc="E3B15[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered text-end" ><t t-if="E3B15" t-esc="E3B15[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered text-center" >"</td>
+                        <td class="bordered text-end" ><t t-if="E3B15" t-esc="E3B15[1]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                    </tr>
+                    <tr style="border-bottom:2px solid black;" >
+                        <td>E 3 B 16</td>
+                        <td>Fourniture d'énergie</td>
+                        <td class="bordered text-end" ><t t-if="E3B16" t-esc="E3B16[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered text-end" ><t t-if="E3B16" t-esc="E3B16[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered text-center" >"</td>
+                        <td class="bordered text-end" ><t t-if="E3B16" t-esc="E3B16[1]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                    </tr>
+                    <tr>
+                        <td>E 3 B 21</td>
+                        <td>Productions : biens, produits et denrées visées par l'art. 21 du C. TCA </td>
+                        <td class="bordered text-end" ><t t-if="E3B21" t-esc="E3B21[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered text-end" ><t t-if="E3B21" t-esc="E3B21[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td>19%</td>
+                        <td class="bordered text-end" ><t t-if="E3B21" t-esc="E3B21[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                    </tr>
+                    <tr>
+                        <td>E 3 B 22</td>
+                        <td>Revente en l'état : biens, produits et denrées visées par l'art. 21 du C. TCA ..</td>
+                        <td class="bordered text-end" ><t t-if="E3B22" t-esc="E3B22[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered text-end" ><t t-if="E3B22" t-esc="E3B22[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered text-center" >"</td>
+                        <td class="bordered text-end" ><t t-if="E3B22" t-esc="E3B22[1]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                    </tr>
+                    <tr>
+                        <td>E 3 B 23</td>
+                        <td>Travaux immobiliers autres que ceux soumis au taux de 7% </td>
+                        <td class="bordered text-end" ><t t-if="E3B23" t-esc="E3B23[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered text-end" ><t t-if="E3B23" t-esc="E3B23[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered text-center" >"</td>
+                        <td class="bordered text-end" ><t t-if="E3B23" t-esc="E3B23[1]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                    </tr>
+                    <tr>
+                        <td>E 3 B 24</td>
+                        <td>Professions libérales </td>
+                        <td class="bordered text-end" ><t t-if="E3B24" t-esc="E3B24[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered text-end" ><t t-if="E3B24" t-esc="E3B24[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered text-center" >"</td>
+                        <td class="bordered text-end" ><t t-if="E3B24" t-esc="E3B24[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                    </tr>
+                    <tr>
+                        <td>E 3 B 25</td>
+                        <td>Opérations de banques et d'assurances</td>
+                        <td class="bordered text-end" ><t t-if="E3B25" t-esc="E3B25[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered text-end" ><t t-if="E3B25" t-esc="E3B25[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered text-center" >"</td>
+                        <td class="bordered text-end" ><t t-if="E3B25" t-esc="E3B25[1]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                    </tr>
+                    <tr>
+                        <td>E 3 B 26</td>
+                        <td>Prestations de téléphones et de télex </td>
+                        <td class="bordered text-end" ><t t-if="E3B26" t-esc="E3B26[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered text-end" ><t t-if="E3B26" t-esc="E3B26[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered text-center" >"</td>
+                        <td class="bordered text-end" ><t t-if="E3B26" t-esc="E3B26[1]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                    </tr>
+                    <tr>
+                        <td>E 3 B 28</td>
+                        <td>Autres prestations de services </td>
+                        <td class="bordered text-end" ><t t-if="E3B28" t-esc="E3B28[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered text-end" ><t t-if="E3B28" t-esc="E3B28[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered text-center" >"</td>
+                        <td class="bordered text-end" ><t t-if="E3B28" t-esc="E3B28[1]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                    </tr>
+                    <tr>
+                        <td>E 3 B 31</td>
+                        <td>Débits de boissons </td>
+                        <td class="bordered text-end" ><t t-if="E3B31" t-esc="E3B31[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered text-end" ><t t-if="E3B31" t-esc="E3B31[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered text-center" >"</td>
+                        <td class="bordered text-end" ><t t-if="E3B31" t-esc="E3B31[1]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                    </tr>
+                    <tr>
+                        <td>E 3 B 32</td>
+                        <td>Productions : biens, produits et denrées visées par l'article 21 du C. TCA</td>
+                        <td class="bordered text-end" ><t t-if="E3B32" t-esc="E3B32[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered text-end" ><t t-if="E3B32" t-esc="E3B32[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered text-center" >"</td>
+                        <td class="bordered text-end" ><t t-if="E3B32" t-esc="E3B32[1]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                    </tr>
+                    <tr>
+                        <td>E 3 B 33</td>
+                        <td>Revente en l'état : biens, produits et denrées visées par l'art. 21 du C. TCA ..</td>
+                        <td class="bordered text-end" ><t t-if="E3B33" t-esc="E3B33[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered text-end" ><t t-if="E3B33" t-esc="E3B33[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered text-center" >"</td>
+                        <td class="bordered text-end" ><t t-if="E3B33" t-esc="E3B33[1]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                    </tr>
+                    <tr>
+                        <td>E 3 B 34</td>
+                        <td>Tabacs et allumettes </td>
+                        <td class="bordered text-end" ><t t-if="E3B34" t-esc="E3B34[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered text-end" ><t t-if="E3B34" t-esc="E3B34[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered text-center" >"</td>
+                        <td class="bordered text-end" ><t t-if="E3B34" t-esc="E3B34[1]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                    </tr>
+                    <tr>
+                        <td>E 3 B 35</td>
+                        <td>Spectacles, jeux et divertissements autres que ceux de l'art. 21 du C. TCA ...</td>
+                        <td class="bordered text-end" ><t t-if="E3B35" t-esc="E3B35[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered text-end" ><t t-if="E3B35" t-esc="E3B35[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered text-center" >"</td>
+                        <td class="bordered text-end" ><t t-if="E3B35" t-esc="E3B35[1]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                    </tr>
+                    <tr>
+                        <td>E 3 B 36</td>
+                        <td>Autres prestations de services visées à l'article 21 du C. TCA</td>
+                        <td class="bordered text-end" ><t t-if="E3B36" t-esc="E3B36[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered text-end" ><t t-if="E3B36" t-esc="E3B36[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered text-center" >"</td>
+                        <td class="bordered text-end" ><t t-if="E3B36" t-esc="E3B36[1]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                    </tr>
+                    <tr>
+                        <td>E 3 B 37</td>
+                        <td>Consommations sur place</td>
+                        <td class="bordered text-end" ><t t-if="E3B37" t-esc="E3B37[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered text-end" ><t t-if="E3B37" t-esc="E3B37[0]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                        <td class="bordered text-center" >"</td>
+                        <td class="bordered text-end" ><t t-if="E3B37" t-esc="E3B37[1]"  t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                    </tr>
+                    <tr style="border:1px solid black;" >
+                        <th class="text-center" colspan="2"><span>المجموع العام لرقم الأعمال</span><br/><span>TOTAL GENERAL DES CHIFFRES D'AFFAIRES</span></th>
+                        <th class="text-end" ><t t-esc="ca_imposable" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"/></th>
+                        <th class="text-end" ></th>
+                        <th class="text-end" ><t t-esc="ca_imposable" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"/></th>
+                        <td class="bordered text-center" ></td>
+                        <th class="text-end" ><t t-esc="tva_sale" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"/></th>
+                    </tr>
+                </table>
+                <br/>
+                <table id="third-page-tab" class="validation_table">
+                    <tr style="border:1px solid black;" >
+                        <td rowspan="2"> </td>
+                        <th style="border:0px;" class="text-center" ><span style="border:0px;text-decoration:underline;">B/ Déductions à opérer</span></th>
+                        <th style="border:0px;" class="text-center" ><span style="border:0px;text-decoration:underline;">ب – الحسومات المجراة :</span></th>
+                        <th style="border:0px;" width="5%"></th>
+                        <th style="border:0px;" ></th>
+                        <th style="border:0px;" class="text-center"><span style="border:0px;text-decoration:underline;" >C / TVA à payer</span></th>
+                        <th style="border:0px;" class="text-center"><span style="border:0px;text-decoration:underline;" >ت – ر. ق. م الواجب دفعه  </span></th>
+                    </tr>
+                    <tr style="border:0px;" >
+                        <td style="border-bottom:1px solid black;border-right:1px solid black;" class="text-center" >Nature des déductions</td>
+                        <td style="border-bottom:1px solid black;border-right:1px solid black;" class="text-center" >Montant</td>
+                        <td style="border:0px;border-right:1px solid black;" ></td>
+                        <td style="border:0px;border-right:1px solid black;" ></td>
+                        <td style="border:0px;border-right:1px solid black;" ></td>
+                        <td style="border:0px;border-right:1px solid black;" ></td>
+                    </tr>
+                    <tr style="border:0px;">
+                        <td>E 3 B 91</td>
+                        <td>Précompte antérieurs (mois précédent)</td>
+                        <td class="bordered text-end" ><t t-esc="las_precompte" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"/></td>
+                        <td class="bordered" ></td>
+                        <td>C</td>
+                        <td>- Total des droits dus.</td>
+                        <td class="bordered text-end" ><t t-esc="tva_sale" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"/></td>
+                    </tr>
+                    <tr>
+                        <td>E 3 B 92</td>
+                        <td>TVA sur achats de biens, matières et services (art. 29 C. TCA)</td>
+                        <td class="bordered text-end" ><t t-esc="tva_purchase" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"/></td>
+                        <td class="bordered" ></td>
+                        <td>E 3 B 97</td>
+                        <td><span>Régularisation du prorata (art. 40 C. TCA) (+)</span><br/><span>(déduction excédentaire)</span></td>
+                        <td class="bordered" ></td>
+                    </tr>
+                    <tr>
+                        <td>E 3 B 93</td>
+                        <td>TVA sur achats de biens amortissables (art. 38 C. TCA)</td>
+                        <td class="bordered" ></td>
+                        <td class="bordered" ></td>
+                        <td>E 3 B 98</td>
+                        <td>- Reversement de la déduction (art. 38 C. TCA) (+)</td>
+                        <td class="bordered" ></td>
+                    </tr>
+                    <tr>
+                        <td>E 3 B 94</td>
+                        <td>Régularisation du prorata (déduction complémentaire) (art. 40 C. TCA).</td>
+                        <td class="bordered" ></td>
+                        <td class="bordered" ></td>
+                        <td class="bordered" ></td>
+                        <th><span style="text-decoration:underline;" >TOTAL A RAPPELER (C)</span> <span style="text-decoration:underline;"> مجموع المستحقات</span>  </th>
+                        <td class="bordered text-end" ><t t-esc="tva_sale" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"/></td>
+                    </tr>
+                    <tr>
+                        <td>E 3 B 95</td>
+                        <td>TVA à récupérer sur factures annulées ou impayées (art. 18 C. TCA)</td>
+                        <td class="bordered" ></td>
+                        <td class="bordered" ></td>
+                        <td>B</td>
+                        <td>- Total des déductions à opérer (B) ( - )</td>
+                        <td class="bordered text-end" ><t t-esc="tva_purchase + las_precompte" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"/></td>
+                    </tr>
+                    <tr>
+                        <td>E 3 B 96</td>
+                        <td>Autres déductions (notification de précompte, etc.…)</td>
+                        <td class="bordered" ></td>
+                        <td class="bordered" ></td>
+                        <td>E 3 B 00</td>
+                        <td><strong style="text-decoration:underline;">TVA à payer au titre du mois (C – B)</strong><br/><span>(A reporter dans le cadre "Récapitulation" ligne 10)</span></td>
+                        <td class="bordered text-end" ><t t-esc="tva if tva &gt; 0 else 0" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"/></td>
+                    </tr>
+                    <tr style="border-bottom:1px solid black;" >
+                        <td class="bordered" ></td>
+                        <td>
+                            <span>NB : Joindre un état détaillé des fournisseurs conformément à l'article</span><br/>
+                            <span class="text-end" >29 du C. TCA.br</span>
+                            <div style="width:98%;" class="text-end"><strong class="text-end" >مجموع الحسومات المجراة</strong></div>
+                            <strong class="text-end">Total des déductions à opérer (B)</strong>
+                        </td>
+                        <td class="bordered text-end" ><t t-esc="tva_purchase + las_precompte" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"/></td>
+                        <td class="bordered" ></td>
+                        <td>E 3 B 99</td>
+                        <td><span style="text-decoration:underline;" >Précompte à reporter sur le mois suivant (B – C)</span></td>
+                        <td class="bordered text-end" ><t t-esc="tva if tva &lt; 0 else 0" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}"/></td>
+                    </tr>
+                </table>
+            </div>
+        </t>
+        </template>
+
+        <record id="paperformat_g50" model="report.paperformat">
+            <field name="name">A4</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">1</field>
+            <field name="margin_bottom">1</field>
+            <field name="margin_left">2</field>
+            <field name="margin_right">2</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">9</field>
+            <field name="dpi">96</field>
+        </record>
+
+    <record id="declaration_g_50_report_action" model="ir.actions.report">
+        <field name="name">G_50</field>
+        <field name="model">declaration.g50</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">dz_accounting.declaration_g_50_report</field>
+        <field name="report_file">dz_accounting.declaration_g_50_report</field>
+        <field name="print_report_name">'G_50'</field>
+        <field name="paperformat_id" ref="paperformat_g50"/>
+        <field name="binding_type">report</field>
+    </record>
+    </data>
+</odoo>

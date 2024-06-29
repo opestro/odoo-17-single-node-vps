@@ -1,0 +1,287 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!--LIASSE FISCAL VIEWS -->
+
+        <record id="form_view_account_liasse_report_config_form" model="ir.ui.view">
+            <field name="name">account.liasse.report_config</field>
+            <field name="model">account.liasse.report_config</field>
+            <field name="arch" type="xml">
+                <form string="Liasse Fiscal Lines">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" />
+                                <field name="type" invisible="1" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page invisible="type not in ['liasse','bilan']" string="ACTIF">
+                                    <field name="bilan_actif_ids" nolabel="1" >
+                                        <tree string="ACTIF">
+                                            <field name="name"/>
+                                            <field name="code" widget="many2many_tags"/>
+                                            <field name="code_debit" widget="many2many_tags"/>
+                                            <field name="code_credit" invisible="1" widget="many2many_tags"/>
+                                            <field name="amortissement_code" widget="many2many_tags"/>
+                                        </tree>
+                                    </field>
+                            </page>
+                            <page invisible="type not in ['liasse','bilan']" string="PASSIF">
+                                <field name="bilan_passif_ids" nolabel="1" >
+                                    <tree string="PASSIF">
+                                        <field name="name"/>
+                                        <field name="code" widget="many2many_tags"/>
+                                        <field name="code_debit" invisible="1" widget="many2many_tags"/>
+                                        <field name="code_credit" widget="many2many_tags"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page invisible="type not in ['tft']"  string="TFT">
+                                <field name="bilan_passif_ids" nolabel="1" >
+                                    <tree string="TFT">
+                                        <field name="name"/>
+                                        <field name="code" widget="many2many_tags"/>
+                                        <field name="code_debit" widget="many2many_tags"/>
+                                        <field name="code_credit" widget="many2many_tags"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page invisible="type not in ['era']"  string="ERA">
+                                <field name="bilan_passif_ids" nolabel="1" >
+                                    <tree string="ERA">
+                                        <field name="name"/>
+                                        <field name="code" widget="many2many_tags"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page invisible="type not in ['tcr']"  string="COMPTE DE RESULTAT">
+                                    <field name="compte_res_ids" nolabel="1">
+                                        <tree string="ACTIF">
+                                            <field name="name"/>
+                                            <field name="code" widget="many2many_tags"/>
+                                        </tree>
+                                    </field>
+                            </page>
+                            <page invisible="type not in ['liasse']"  string="COMPTE DE RESULTAT">
+                                <p>COMPTE DE RESULTAT (page 1)</p>
+                                <field name="compte_res_ids" nolabel="1">
+                                        <tree string="ACTIF">
+                                            <field name="name"/>
+                                            <field name="code" widget="many2many_tags"/>
+                                        </tree>
+                                    </field>
+                                <p>COMPTE DE RESULTAT (page 2)</p>
+                                <field name="compte_res_second_ids" nolabel="1">
+                                        <tree string="ACTIF">
+                                            <field name="name"/>
+                                            <field name="code" widget="many2many_tags"/>
+                                        </tree>
+                                    </field>
+                            </page>
+                            <page invisible="type not in ['liasse']"  string="1/Stock, 2/FLuct.">
+                                <group>
+                                    <group>
+                                        <field name="inventory" widget="radio" />
+                                    </group>
+                                </group>
+                                <p>1/ Tableau des mouvements des stocks :</p>
+                                    <field name="stock_ids" invisible="inventory == 'intermittent'"  nolabel="1">
+                                        <tree string="">
+                                            <field name="name"/>
+                                            <field name="code" widget="many2many_tags"/>
+                                        </tree>
+                                    </field>
+                                    <field name="intermittent_ids" invisible="inventory != 'intermittent'"  nolabel="1">
+                                        <tree string="">
+                                            <field name="name"/>
+                                            <field name="code" widget="many2many_tags"/>
+                                        </tree>
+                                    </field>
+                                <p>2/ Tableau de la fluctuation de la production stockée :</p>
+                                <field name="fluctuation_ids" nolabel="1" >
+                                    <tree string="">
+                                        <field name="name"/>
+                                        <field name="code" widget="many2many_tags"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page invisible="type not in ['liasse']"  string="3/Charges, 4/Prod.">
+                                <p>3/ Charges de personnel, impôts, taxes et versements assimilés, autres services :</p>
+                                <field name="charges_ids"  nolabel="1">
+                                        <tree string="3/Charges.">
+                                            <field name="name"/>
+                                            <field name="code" widget="many2many_tags"/>
+                                        </tree>
+                                    </field>
+                                <p>4/ Autres charges et produits opérationnels :</p>
+                                <field name="other_charge_ids" nolabel="1" >
+                                        <tree string="3/Charges, 4/Prod.">
+                                            <field name="name"/>
+                                            <field name="code" widget="many2many_tags"/>
+                                        </tree>
+                                    </field>
+                            </page>
+                            <page invisible="type not in ['liasse']"  string="5/Amort, 6/Immo">
+                                <p> 5/ Tableau des amortissements et pertes de valeurs :</p>
+                                <field name="amo_ids" nolabel="1" >
+                                    <tree string="">
+                                        <field name="name"/>
+                                        <field name="code" widget="many2many_tags"/>
+                                    </tree>
+                                </field>
+                                <p> 6/ Tableau des immobilisations créées ou acquises au cours de l’exercice :</p>
+                                <field name="immo_ids" nolabel="1" >
+                                    <tree string="">
+                                        <field name="name"/>
+                                        <field name="code" widget="many2many_tags"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page invisible="type not in ['liasse']"  string="7/Cess.,8/Prov." >
+                                <p>7/ Tableau des immobilisations cédées (plus ou moins value) au cours de l’exercice :</p>
+                                    <field name="cession_ids" nolabel="1">
+                                        <tree>
+                                            <field name="year"/>
+                                            <field name="date_from"/>
+                                            <field name="date_to"/>
+                                        </tree>
+                                    </field>
+                                <p> 8/ Tableau des provisions et pertes de valeurs :</p>
+                                    <field name="provision_ids" nolabel="1">
+                                        <tree>
+                                            <field name="year"/>
+                                            <field name="date_from"/>
+                                            <field name="date_to"/>
+                                        </tree>
+                                    </field>
+                            </page>
+                            <page invisible="type not in ['liasse']"  string="(8.1,8.2)/Pertes" >
+                                <p> 8/1 Relevé des pertes de valeurs sur créances :</p>
+                                    <field name="perte_creance_ids" nolabel="1">
+                                        <tree>
+                                            <field name="year"/>
+                                            <field name="date_from"/>
+                                            <field name="date_to"/>
+                                        </tree>
+                                    </field>
+                                <p> 8/2 Relevé des pertes de valeurs sur actions et parts sociales :</p>
+                                    <field name="perte_action_ids" nolabel="1">
+                                        <tree>
+                                            <field name="year"/>
+                                            <field name="date_from"/>
+                                            <field name="date_to"/>
+                                        </tree>
+                                    </field>
+                            </page>
+                            <page invisible="type not in ['liasse']"  string="9/Résultat Fiscal" >
+                                <p> 9/ Tableau de détermination du résultat fiscal :</p>
+                                    <field name="fiscal_ids" nolabel="1" >
+                                        <tree>
+                                            <field name="exercice_id" />
+                                            <field name="res_comptable_net" />
+                                            <field name="res_fiscal_net" />
+                                            <field name="r13" />
+                                        </tree>
+                                    </field>
+                            </page>
+                            <page invisible="type not in ['liasse']"  string="10/Affec.,11/Partic." >
+                                <p> 10/ Tableau d’affectation du résultat et des réserves (N-1) :</p>
+                                    <field name="affectation_ids" nolabel="1" >
+                                        <tree>
+                                            <field name="year"/>
+                                            <field name="date_from" />
+                                            <field name="date_to" />
+                                        </tree>
+                                    </field>
+                                <p> 11/ Tableau des participations (filiales et entités associées) :</p>
+                                    <field name="participation_ids" nolabel="1" >
+                                        <tree>
+                                            <field name="year"/>
+                                            <field name="date_from" />
+                                            <field name="date_to" />
+                                        </tree>
+                                    </field>
+                            </page>
+                            <page invisible="type not in ['liasse']"  string="12/Hon.,13/TAP." >
+                                <p>12/ Commissions et courtages, redevances, honoraires, sous-traitance, rémunérations diverses et frais de siège :</p>
+                                <field name="honoraire_ids" nolabel="1">
+                                        <tree>
+                                            <field name="year"/>
+                                            <field name="date_from"/>
+                                            <field name="date_to"/>
+                                        </tree>
+                                    </field>
+                                <p>13/ Taxe sur l’activité professionnelle :</p>
+                                    <field name="tap_ids" nolabel="1">
+                                        <tree>
+                                            <field name="year"/>
+                                            <field name="date_from"/>
+                                            <field name="date_to"/>
+                                        </tree>
+                                    </field>
+                            </page>
+                            <page invisible="type not in ['tvcp']" string="TVCP" >
+                                    <field name="tvcp_ids" nolabel="1">
+                                        <tree>
+                                            <field name="exercice_id"/>
+                                            <field name="date_from"/>
+                                            <field name="date_to"/>
+                                        </tree>
+                                    </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_account_liasse_report_config_tree" model="ir.ui.view">
+            <field name="name">account.liasse.report_config.tree</field>
+            <field name="model">account.liasse.report_config</field>
+            <field name="arch" type="xml">
+                <tree string="Liasse Fiscal Lines">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_account_liasse_report_config" model="ir.actions.act_window">
+            <field name="name">Paramétrage des états financiers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.liasse.report_config</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_account_liasse_report_config_tree"/>
+        </record>
+
+        <menuitem id="menu_report_config_account" name="Report config"
+                  parent="account.menu_finance_entries" sequence="15"
+                  groups="account.group_account_invoice"/>
+
+        <menuitem id="menu_report_cofig_account"
+                  parent="menu_report_config_account"
+                  action="action_account_liasse_report_config"
+                  name="Paramétrage des états financiers"
+                  groups="account.group_account_invoice"
+        />
+
+        <!-- CODE -->
+
+        <record id="form_view_account_line_form" model="ir.ui.view">
+            <field name="name">account.line</field>
+            <field name="model">account.line</field>
+            <field name="arch" type="xml">
+                <form string="BILAN ACTIF">
+                    <sheet>
+                       <group>
+                           <group>
+                               <field name="account" widget="many2many_tags" />
+                               <field name="sauf" widget="many2many_tags" />
+                           </group>
+                       </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

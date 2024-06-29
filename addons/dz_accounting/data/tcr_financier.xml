@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tcr_financier_report_config" model="account.liasse.report_config">
+            <field name="name">TCR Financier</field>
+            <field name="type" eval="'tcr'"/>
+        </record>
+
+        <record id="account_report_tcr_financier_liasse_27" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">Ventes et produits annexes</field>
+            <field name="domain">[('code', '=like', '70%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_28" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">Variations stocks produits fini et en cours</field>
+            <field name="domain">[('code', '=like', '71%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_35" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">Production immobilisée</field>
+            <field name="domain">[('code', '=like', '72%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_36" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">Subventions d'exploitation</field>
+            <field name="domain">[('code', '=like', '74%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_37" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">I-Production de l'exercice</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_38" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">Achats consommés</field>
+            <field name="domain">[('code', '=like', '60%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_39" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">Services extérieurs et autres consommations</field>
+            <field name="domain">['|',('code', '=like', '61%'),('code', '=like', '62%')]</field>
+        </record>
+
+        <record id="account_report_tcr_financier_liasse_56" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">II-Consommations de l'exercice</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_57" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">III-Valeur ajoutée d'exploitation (I–II)</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_58" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">Charges de personnel</field>
+            <field name="domain">[('code', '=like', '63%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_59" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">Impôts et taxes et versements assimilés</field>
+            <field name="domain">[('code', '=like', '64%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_61" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">IV-Excédent brut d’exploitation</field>
+            <field name="domain"></field>
+        </record>
+
+        <record id="account_report_tcr_financier_liasse_62" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">Autres produits opérationnels</field>
+            <field name="domain">[('code', '=like', '75%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_63" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">Autres charges opérationnelles</field>
+            <field name="domain">[('code', '=like', '65%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_64" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">Dotations aux amortissements, Provision et Pertes de valeur</field>
+            <field name="domain">[('code', '=like', '68%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_67" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">Reprise sur pertes de valeur et provisions</field>
+            <field name="domain">[('code', '=like', '78%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_68" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">V-Résultat opérationnel</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_69" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">Produits financiers</field>
+            <field name="domain">[('code', '=like', '76%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_70" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">Charges financières</field>
+            <field name="domain">[('code', '=like', '66%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_71" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">VI-Résultat financier</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_72" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">VII-Résultat ordinaire avant impots (V+VI)</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_76" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">Impôts exigibles sur résultats</field>
+            <field name="domain">['|',('code', '=like', '695%'),('code', '=like', '698%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_77" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">Impôts différés variations sur résultats</field>
+            <field name="domain">['|',('code', '=like', '692%'),('code', '=like', '693%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_75" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">VIII-Résultat NET DES ACTIVITES ORDINAIRE</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_73" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">Eléments extraordinaires (produits) (*)</field>
+            <field name="domain">[('code', '=like', '77%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_74" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">Eléments extraordinaires (Charges) (*)</field>
+            <field name="domain">[('code', '=like', '67%')]</field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_79" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">IX-Résultat EXTRAORDINAIRE</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_78" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">X-RESULTAT NET DE L'EXERCICE</field>
+            <field name="domain"></field>
+        </record>
+        <record id="account_report_tcr_financier_liasse_78" model="report.compte.res">
+            <field name="liasse_id" eval="ref('dz_accounting.tcr_financier_report_config')" />
+            <field name="name">XI-RESULTAT NET DE L'ENSEMBLE CONSOLIDE</field>
+            <field name="domain"></field>
+        </record>
+
+    </data>
+</odoo>

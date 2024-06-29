@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!--PASSIF-->
+
+            <record id="form_view_report_bilan_passif_form" model="ir.ui.view">
+            <field name="name">report.bilan.passif</field>
+            <field name="model">report.bilan.passif</field>
+            <field name="arch" type="xml">
+                <form string="BILAN PASSIF">
+                    <sheet>
+                        <h1><field name="name"/></h1>
+                        <notebook>
+                            <page string="SOLDE">
+                                <field name="code" nolabel="0" >
+                                    <tree editable="top" string="">
+                                        <field name="account" widget="many2many_tags"/>
+                                        <field name="sauf" widget="many2many_tags"/>
+                                    </tree>
+                                </field>
+                                <field name="domain" readonly="1" />
+                            </page>
+                            <page string="CREDIT">
+                                <field name="code_credit" nolabel="0" >
+                                    <tree editable="top" >
+                                        <field name="account" widget="many2many_tags"/>
+                                        <field name="sauf" widget="many2many_tags"/>
+                                    </tree>
+                                </field>
+                                <field name="domain_credit" readonly="1" />
+                            </page>
+                            <page string="DEBIT" >
+                                <field name="code_debit" nolabel="0" >
+                                    <tree editable="top" string="">
+                                        <field name="account" widget="many2many_tags"/>
+                                        <field name="sauf" widget="many2many_tags"/>
+                                    </tree>
+                                </field>
+                                <field name="domain_debit" readonly="1" />
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- ACTIF -->
+        <record id="form_view_report_bilan_actif_form" model="ir.ui.view">
+            <field name="name">report.bilan.actif</field>
+            <field name="model">report.bilan.actif</field>
+            <field name="arch" type="xml">
+                <form string="BILAN ACTIF">
+                    <sheet>
+                        <h1><field name="name"/></h1>
+                        <notebook>
+                            <page string="SOLDE">
+                                <field name="code" nolabel="0" >
+                                    <tree editable="top" string="">
+                                        <field name="account" widget="many2many_tags"/>
+                                        <field name="sauf" widget="many2many_tags"/>
+                                    </tree>
+                                </field>
+                                <field name="domain" readonly="1" />
+                            </page>
+                            <page string="DEBIT">
+                                <field name="code_debit" nolabel="0" >
+                                    <tree editable="top" string="">
+                                        <field name="account" widget="many2many_tags"/>
+                                        <field name="sauf" widget="many2many_tags"/>
+                                    </tree>
+                                </field>
+                                <field name="domain_debit" readonly="1"/>
+                            </page>
+                            <page string="CREDIT" invisible="1">
+                                <field name="code_credit" nolabel="0" >
+                                    <tree editable="top" >
+                                        <field name="account" widget="many2many_tags"/>
+                                        <field name="sauf" widget="many2many_tags"/>
+                                    </tree>
+                                </field>
+                                <field name="domain_credit" readonly="1"/>
+                            </page>
+                            <page string="AMORTISSEMENT">
+                                <field name="amortissement_code" nolabel="0" >
+                                    <tree editable="top" string="">
+                                        <field name="account" widget="many2many_tags"/>
+                                        <field name="sauf" widget="many2many_tags"/>
+                                    </tree>
+                                </field>
+                                <field name="amortissement" readonly="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_report_bilan_actif_tree" model="ir.ui.view">
+            <field name="name">report.bilan.actif.tree</field>
+            <field name="model">report.bilan.actif</field>
+            <field name="arch" type="xml">
+                <tree string="Liasse Fiscal Lines">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="code_debit"/>
+                    <field name="code_credit"/>
+                    <field name="amortissement_code"/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,129 @@
+<odoo>
+    <data>
+        <record id="paperformat_grand_livre" model="report.paperformat">
+        <field name="name">A4</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">12</field>
+        <field name="margin_bottom">15</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">9</field>
+        <field name="dpi">90</field>
+    </record>
+
+        <record id="paperformat_grand_livre_paysage" model="report.paperformat">
+        <field name="name">A4 Paysage</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">12</field>
+        <field name="margin_bottom">15</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">9</field>
+        <field name="dpi">90</field>
+    </record>
+        <template id="livre_des_tiers" >
+        <t t-call="web.basic_layout">
+            <style type="text/css">
+                    @font-face{
+                        font-family: 'Times';
+                        src: url('/dz_accounting/static/fonts/times.ttf') format('truetype');
+                    }
+                    .validation_table th,.validation_table td {border: 2px solid black;padding : 4px;color: black;}
+                    .validation_table th {font-weight: bold !important;}
+                    .validation_table{margin-bottom:5px;}
+                    .container {font-family: "Times New Roman", Times, serif;font-size: 15px;}
+                    .exercice td,.exercice th{border:1px solid black;width: fit-content;min-width:20px;}
+                    .exercice{border-collapse:collapse;margin:10px;margin:auto;margin-top:3px;margin-bottom:5px;}
+                    .entreprise-info{width:65%;border:1px solid black;margin-left:40px;margin-top:15px; padding:5px;}
+            </style>
+            <div class="page">
+                <div class="entreprise-info" >
+                        <strong>Désignation de l’entreprise :</strong><t t-esc="company" /><br/>
+                        <strong>Activité :</strong><t t-esc="activity"/><br/>
+                        <strong>Adresse :</strong><t t-esc="address" /><br/>
+                        <strong>NIF :</strong><t t-esc="nif" />
+                    </div>
+                <div  style="padding:30px 60px;" class="text-center" >
+                    <strong style="background-color: #c4c4d4;text-decoration:underline;padding:18px 55px;border: 2px solid black;"  >
+                        LIVRE DES TIERS: <span t-esc="date_from" /> à <span t-esc="date_to" />
+                    </strong>
+                </div>
+                <t t-foreach="livres" t-as="livre" >
+                    <strong><t t-esc="livre['code']" />-<t t-esc="livre['name']" /></strong><br/>
+                    <t t-foreach="livre['partners']" t-as="partner" >
+                        <strong><t t-esc="partner['name']" /></strong>
+                        <table class="table table-sm table-reports validation_table">
+                            <thead>
+                                <tr style="background-color: #c4c4d4;" >
+                                <th class="text-center"><strong>Date</strong></th>
+                                <th class="text-center"><strong>Journal</strong></th>
+                                <th class="text-center">Partenaire</th>
+                                <th class="text-center"><strong>écriture</strong></th>
+                                <th class="text-center">Référence</th>
+                                <th class="text-center">Débit</th>
+                                <th class="text-center">Crédit</th>
+                                <th class="text-center">Solde</th>
+                                <th class="text-center">let.</th>
+                            </tr>
+                            </thead>
+                            <tr t-foreach="partner['items']" t-as="item" >
+                                <td><t t-esc="item['date']" /></td>
+                                <td><t t-esc="item['journal_id']" /></td>
+                                <td><t t-esc="item['partner_id']" /></td>
+                                <td><t t-esc="item['name']" /></td>
+                                <td><t t-esc="item['ref']" /></td>
+                                <td class="text-end" ><t t-esc="item['debit']" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                                <td class="text-end"><t t-esc="item['credit']" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                                <td class="text-end"><t t-esc="item['solde']" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></td>
+                                <td><t t-esc="item['reconcile_id']"  /></td>
+                            </tr>
+                            <tr>
+                                <td class="text-end" colspan="5"><strong>Total des mouvements </strong></td>
+                                <td class="text-end" ><strong><t t-esc="partner['exercice_debit_cumule']" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></strong></td>
+                                <td class="text-end" ><strong><t t-esc="partner['exercice_credit_cumule']" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></strong></td>
+                                <td class="text-end" ><strong><t t-esc="partner['exercice_solde_cumule']" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></strong></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="text-end" colspan="5"><strong>Total au debut de la periode</strong></td>
+                                <td class="text-end" ><strong><t t-esc="partner['debit_start']" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></strong></td>
+                                <td class="text-end" ><strong><t t-esc="partner['credit_start']" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></strong></td>
+                                <td class="text-end" ><strong><t t-esc="partner['solde_start']" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></strong></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="text-end" colspan="5"><strong>Solde à la fin de la periode</strong></td>
+                                <td class="text-end" ><strong><t t-esc="partner['debit_start'] + partner['exercice_debit_cumule']" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></strong></td>
+                                <td class="text-end" ><strong><t t-esc="partner['credit_start'] + partner['exercice_credit_cumule']" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></strong></td>
+                                <td class="text-end" ><strong><t t-esc="partner['solde_start'] + partner['exercice_solde_cumule']" t-options="{'widget': 'float', 'decimal_precision': 'Product Price'}" /></strong></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </t>
+                </t>
+            </div>
+        </t>
+    </template>
+
+    <record id="livre_des_tiers_action" model="ir.actions.report">
+        <field name="name">Livre des tiers</field>
+        <field name="model">account.livre.tiers</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">dz_accounting.livre_des_tiers</field>
+        <field name="report_file">dz_accounting.livre_des_tiers</field>
+        <field name="print_report_name">'Livre des tiers'</field>
+        <field name="paperformat_id" ref="paperformat_grand_livre_paysage"/>
+        <field name="binding_type">report</field>
+    </record>
+    </data>
+</odoo>

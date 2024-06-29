@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="form_view_report_affectation_tab_form" model="ir.ui.view">
+            <field name="name">report.affectation.tab.view</field>
+            <field name="model">report.affectation.tab</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header>
+                        <button type="object" name="calculate_origine" string="Calculer résultat(N-1) et report(N-1)" class="btn-primary" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <label for="date_from" string="Period"/>
+                            <div>
+                                <field name="date_from" class="oe_inline"/> - <field name="date_to" class="oe_inline"/>
+                            </div>
+                        </group>
+                        <group>
+                            <group string="Origine" >
+                                <label for="report_previous" style="width:250px;"/>
+                                <field name="report_previous" nolabel="1"/>
+                                <field name="res_previous"/>
+                                <field name="prelevement_reserve"/>
+                            </group>
+                            <group string="Affectation" >
+                                <field name="reserve"/>
+                                <field name="capital_augmentation"/>
+                                <field name="dividendes"/>
+                                <field name="report_current"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="form_view_report_participation_tap_form" model="ir.ui.view">
+            <field name="name">participation.tap.view</field>
+            <field name="model">participation.tap</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <label for="date_from" string="Period"/>
+                            <div>
+                                <field name="date_from" class="oe_inline"/> - <field name="date_to" class="oe_inline"/>
+                            </div>
+                        </group>
+                            <p>Filiales :</p>
+                            <field name="filiale_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="filaile" required="1" />
+                                    <field name="capitaux"/>
+                                    <field name="dont_capital"/>
+                                    <field name="res"/>
+                                    <field name="avances"/>
+                                    <field name="dividende"/>
+                                    <field name="account_value"/>
+                                </tree>
+                            </field>
+                            <p>Entités associées</p>
+                                <field name="entite_ids" nolabel="1">
+                                    <tree editable="bottom">
+                                        <field name="filaile" required="1" />
+                                        <field name="capitaux"/>
+                                        <field name="dont_capital"/>
+                                        <field name="res"/>
+                                        <field name="avances"/>
+                                        <field name="dividende"/>
+                                        <field name="account_value"/>
+                                    </tree>
+                                </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

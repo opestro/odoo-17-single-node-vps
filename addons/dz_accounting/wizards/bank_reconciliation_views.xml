@@ -1,0 +1,86 @@
+<odoo>
+
+    <record id="view_bank_reconciliation_wizard_form" model="ir.ui.view">
+        <field name="name">bank.reconciliation.wizard.form</field>
+        <field name="model">bank.reconciliation.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Validate" name="action_validate" type="object" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" required="1" />
+                            <field name="date" required="1" />
+                            <field name="journal_id" />
+                            <field name="company_id"  invisible="1"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="balance_start" />
+                            <field name="balance_end_real" />
+                            <field name="balance_end_theory" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Ecritures comptables">
+                            <field name="account_move_lines" options="{'no_open':True,'no_create':True}" >
+                                <tree edit="0">
+                                    <field name="date" optional="show"/>
+                                    <field name="company_id" groups="base.group_multi_company"/>
+                                    <field name="move_id" optional="show"/>
+                                    <field name="account_id" options="{'no_open': True}" groups="account.group_account_user"/>
+                                    <field name="partner_id" optional="show"/>
+                                    <field name="ref" optional="show"/>
+                                    <field name="name" optional="show"/>
+                                    <field name="debit" sum="Total Debit"/>
+                                    <field name="credit" sum="Total Credit"/>
+                                    <field name="amount_currency" groups="base.group_multi_currency" optional="hide"/>
+                                    <field name="full_reconcile_id" optional="show"/>
+                                    <field name="reconcile_model_id" invisible="1"/>
+                                    <field name="reconciled" invisible="1"/>
+                                    <field name="currency_id" readonly="1" invisible="1"/>
+                                    <field name="company_currency_id" invisible="1"/>
+                                    <field name="parent_state" invisible="1"/>
+                                </tree>
+                                <form edit="0">
+                                    <group>
+                                        <field readonly="1" name="date" optional="show"/>
+                                        <field readonly="1" name="company_id" groups="base.group_multi_company"/>
+                                        <field readonly="1" name="move_id" optional="show"/>
+                                        <field readonly="1" name="account_id" options="{'no_open': True}" groups="account.group_account_user"/>
+                                        <field readonly="1" name="partner_id" optional="show"/>
+                                        <field readonly="1" name="ref" optional="show"/>
+                                        <field readonly="1" name="name" optional="show"/>
+                                        <field readonly="1" name="debit" sum="Total Debit"/>
+                                        <field readonly="1" name="credit" sum="Total Credit"/>
+                                        <field readonly="1" name="amount_currency" groups="base.group_multi_currency" optional="hide"/>
+                                        <field readonly="1" name="full_reconcile_id" optional="show"/>
+                                        <field readonly="1" name="reconcile_model_id" invisible="1"/>
+                                        <field readonly="1" name="reconciled" invisible="1"/>
+                                        <field name="currency_id" readonly="1" invisible="1"/>
+                                        <field readonly="1" name="company_currency_id" invisible="1"/>
+                                        <field readonly="1" name="parent_state" invisible="1"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_bank_reconciliation_wizard" model="ir.actions.act_window">
+        <field name="name">Rapprochement bancaire</field>
+        <field name="res_model">bank.reconciliation.wizard</field>
+        <field name="view_id" ref="view_bank_reconciliation_wizard_form"/>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+    </record>
+
+    <menuitem id="account_reports_financiers" name="ETATS FINANCIERS" parent="account.menu_finance_reports"  groups="account.group_account_user"/>
+
+
+</odoo>

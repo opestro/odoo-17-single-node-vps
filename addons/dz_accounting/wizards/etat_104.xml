@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="etat_104_form_view" model="ir.ui.view">
+            <field name="name">account.etat.client.form.view</field>
+            <field name="model">account.etat.client</field>
+            <field name="arch" type="xml">
+                <form string="Etat 104">
+                    <field name="company_id" invisible="1"/>
+                    <group>
+                        <field name="exercice_id"/>
+                    </group>
+                    <group col="4">
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                    <footer>
+                        <button name="check_report" string="Print PDF" type="object" default_focus="1" class="oe_highlight"/>
+                        <button name="check_report_xls" string="Print XLS" type="object" default_focus="1" class="oe_highlight"/>
+                        <button string="Cancel" class="btn btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_etat_104_view" model="ir.actions.act_window">
+            <field name="name">Etat 104</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.etat.client</field>
+            <field name="view_id" ref="etat_104_form_view"/>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="etat_104_menu" name="Etat 104"
+                  action="action_etat_104_view"
+                  parent="account_reports_financiers"/>
+    </data>
+</odoo>
