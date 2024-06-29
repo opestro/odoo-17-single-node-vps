@@ -4,7 +4,7 @@ services:
     image: bitnami/postgresql:16
     user: root
     environment:
-      - POSTGRESQL_USER=5442
+      - POSTGRESQL_PORT=5432
       - POSTGRESQL_USER=odoo
       - POSTGRESQL_PASSWORD=odoo17@2023
       - POSTGRESQL_DATABASE=postgres
@@ -13,7 +13,6 @@ services:
       - ./postgresql:/var/lib/postgresql/data
     networks:
       - odoo-dnd-17-v1
-
   odoo:
     #image: odoo:17
     build:
@@ -29,7 +28,7 @@ services:
     command: --
     #entrypoint: /entrypoint.sh
     environment:
-      - PORT=5442
+      - PORT=5432
       - HOST=db
       - USER=odoo
       - PASSWORD=odoo17@2023
